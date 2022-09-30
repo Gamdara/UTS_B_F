@@ -146,11 +146,11 @@ function dashboard_close(){ ?>
     <!-- ./wrapper -->
     <!-- REQUIRED SCRIPTS -->
     <!-- jQuery -->
-    <script src="<?= url() ?>/assets/plugins/jquery/jquery.min.js'"></script>
+    <script src="<?= url() ?>/assets/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
-    <script src="<?= url() ?>/assets/plugins/js/bootstrap.bundle.min.js'"></script>
+    <script src="<?= url() ?>/assets/plugins/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
-    <script src="<?= url() ?>/assets/plugins/js/adminlte.min.js'"></script>
+    <script src="<?= url() ?>/assets/js/adminlte.min.js"></script>
 </body>
 </html>
 <?php } ?>
