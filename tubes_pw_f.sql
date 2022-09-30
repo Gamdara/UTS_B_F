@@ -31,10 +31,22 @@ USE `tubes_pw_f`;
 
 CREATE TABLE `bukus` (
   `id` int(11) NOT NULL,
+  `id_genre` int(11) NOT NULL,
   `judul` varchar(255) NOT NULL,
   `jumlah` int(11) NOT NULL,
   `sinopsis` text NOT NULL,
   `cover` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `genres`
+--
+
+CREATE TABLE `genres` (
+  `id` int(11) NOT NULL,
+  `genre` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -77,6 +89,12 @@ ALTER TABLE `bukus`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `genres`
+--
+ALTER TABLE `genres`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `peminjamans`
 --
 ALTER TABLE `peminjamans`
@@ -99,6 +117,13 @@ ALTER TABLE `users`
 ALTER TABLE `bukus`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
+
+--
+-- AUTO_INCREMENT for table `genres`
+--
+ALTER TABLE `genres`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `users`
 --
@@ -115,7 +140,11 @@ ALTER TABLE `users`
 ALTER TABLE `peminjamans`
   ADD CONSTRAINT `fk_buku_peinjaman` FOREIGN KEY (`id_buku`) REFERENCES `bukus` (`id`),
   ADD CONSTRAINT `fk_user_peminjaman` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
+
+ALTER TABLE `bukus`
+  ADD CONSTRAINT `fk_buku_genre` FOREIGN KEY (`id_genre`) REFERENCES `genres` (`id`)
 COMMIT;
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

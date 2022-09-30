@@ -10,9 +10,26 @@
         return mysqli_fetch_all(execute_query("select * from $table"), MYSQLI_ASSOC);
     }
 
+    function select_all_join($table, $joins){
+        $on = "";
+        foreach($joins as $tabl => $conn){
+            $on .= " join $tabl on $conn ";
+        }
+        return mysqli_fetch_all(execute_query("select * from $table $on"), MYSQLI_ASSOC);
+    }
+
     function select($table, $cond){
         return mysqli_fetch_all(execute_query("select * from $table where $cond"), MYSQLI_ASSOC);
     }
+
+    function select_join($table, $joins, $cond){
+        $on = "";
+        foreach($joins as $tabl => $conn){
+            $on .= " join $tabl on $conn ";
+        }
+        return mysqli_fetch_all(execute_query("select * from $table $on where $cond"), MYSQLI_ASSOC);
+    }
+    
 
     function insert($table, $data){
         $column = "";
