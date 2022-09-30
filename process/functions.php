@@ -1,5 +1,5 @@
 <?php 
-    // include ("./db.php");
+    // include ("../process/db.php");
 
     function execute_query($query){
         global $con;
