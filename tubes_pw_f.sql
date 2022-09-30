@@ -62,7 +62,8 @@ CREATE TABLE `users` (
   `nama` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `foto` varchar(255) NOT NULL
+  `foto` varchar(255) NOT NULL,
+  `role` enum('user','admin') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
