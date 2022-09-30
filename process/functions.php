@@ -11,7 +11,7 @@
     }
 
     function select($table, $cond){
-        return execute_query("select * from $table where $cond[0] $cond[1] $cond[2]");
+        return execute_query("select * from $table where $cond");
     }
 
     function insert($table, $data){
@@ -38,11 +38,11 @@
 
         $set = substr($set , 0, -1);
 
-        return execute_query("update $table set $set where $cond[0] $cond[1] $cond[2]");
+        return execute_query("update $table set $set where $cond");
     }
 
     function delete($table, $cond){
-        return execute_query("delete from $table where $cond[0] $cond[1] $cond[2]");
+        return execute_query("delete from $table where $cond");
     }
 
     
