@@ -7,11 +7,11 @@
         // insert ke table series
         $ins = insert("series", $_POST);
         // update ke table series
-        $upt = update("series", $_POST, ['id', '=', $_GET['id']]);
+        $upt = update("series", $_POST, 'id = '. $_GET['id']);
     }
     if(!empty($_GET)){
         // delete dari tabel series
-        $del = delete("series", ['id', '=', $_GET['id']]);
+        $del = delete("series", 'id = '. $_GET['id']);
     }
     
 ?>
