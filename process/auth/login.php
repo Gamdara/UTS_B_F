@@ -1,6 +1,7 @@
 <?php
     if(isset($_POST['login'])){
         include('../db.php'); 
+        
         $email = $_POST['email'];
         $password = $_POST['password'];
         
