@@ -7,11 +7,11 @@
     }
 
     function select_all($table){
-        return execute_query("select * from $table");
+        return mysqli_fetch_all(execute_query("select * from $table"), MYSQLI_ASSOC);
     }
 
     function select($table, $cond){
-        return execute_query("select * from $table where $cond");
+        return mysqli_fetch_all(execute_query("select * from $table where $cond"), MYSQLI_ASSOC);
     }
 
     function insert($table, $data){
