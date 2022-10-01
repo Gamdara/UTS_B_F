@@ -6,6 +6,10 @@
         return mysqli_query($con, $query);
     }
 
+    function select_foreign($transaksi,$buku,$user){
+        return mysqli_fetch_all(execute_query("select * from $transaksi JOIN $buku ON $transaksi.id_buku = $buku.id WHERE $user = $transaksi.id_user" ), MYSQLI_ASSOC);
+    }
+
     function select_all($table){
         return mysqli_fetch_all(execute_query("select * from $table"), MYSQLI_ASSOC);
     }
