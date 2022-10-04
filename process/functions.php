@@ -6,6 +6,12 @@
         return mysqli_query($con, $query);
     }
 
+    function upload_file($data, $images){
+        foreach($images as $col => $img){
+            $data[$col] = $img;
+        }
+    }
+
     function select_all($table){
         return mysqli_fetch_all(execute_query("select * from $table"), MYSQLI_ASSOC);
     }

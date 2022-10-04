@@ -34,9 +34,6 @@
 ?>
 
 <?php dashboard_open() ?>
-    <div style="position: absolute; right : 1em; bottom : 5em ;">
-        
-    </div>
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -119,7 +116,7 @@
     
 <?php dashboard_close() ?>
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <form class="modal-dialog" role="document" method="POST" action="">
+    <form class="modal-dialog validation" role="document" method="POST" action="" >
         <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Tambah Genre</h5>
@@ -156,13 +153,13 @@
     function setInsertModal(){
         $('.modal-title').html('Tambah Genre')
         $('input[name="genre"]').val('')
-        $('input[name="id"]').val('')
         $('#modalSubmit').attr('name', 'insert')
         $('#exampleModal').modal('show');
     }
 
     $(function () {
         $("#datatable").DataTable({
+        "pageLength": 5,
         "responsive": true, "lengthChange": false, "autoWidth": false,
         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
         }).buttons().container().appendTo('#datatable_wrapper .col-md-6:eq(0)');
@@ -171,4 +168,24 @@
     if ( window.history.replaceState ) {
        window.history.replaceState( null, null, window.location.href );
     }
+
+    (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+            })
+    })()
 </script>
