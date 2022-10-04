@@ -1,15 +1,4 @@
 <?php 
-    function url(){
-        if(isset($_SERVER['HTTPS'])){
-            $protocol = ($_SERVER['HTTPS'] && $_SERVER['HTTPS'] != "off") ? "https" : "http";
-        }
-        else{
-            $protocol = 'http';
-        }
-        
-        return $protocol . "://" . $_SERVER['HTTP_HOST'] .dirname($_SERVER["REQUEST_URI"],count(explode('/',$_SERVER["REQUEST_URI"])) - 2);
-        // return dirname(__FILE__, 3);
-    }
     
     require_once (dirname(__FILE__, 3).'/process/db.php') ;
     require_once (dirname(__FILE__, 3).'/process/functions.php') ;
@@ -26,6 +15,9 @@
     href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="<?= url() ?>/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="<?= url() ?>/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="<?= url() ?>/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?= url() ?>\assets\css\adminlte.min.css">
     <!-- CSS Bootstrap -->
@@ -116,6 +108,12 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-item">
+                            <a href="<?= url() ?>/views/pages/admin/genre/index.php"class="nav-link">
+                                <i class="nav-icon far fa-circle"></i>
+                                <p> Genre</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="<?= url() ?>/views/pages/admin/buku/index.php"class="nav-link">
                                 <i class="nav-icon far fa-circle"></i>
                                 <p> Buku</p>
@@ -162,11 +160,25 @@ function dashboard_close(){ ?>
     <!-- ./wrapper -->
     <!-- REQUIRED SCRIPTS -->
     <!-- jQuery -->
-    <script src="<?= url() ?>/assets/plugins/jquery/jquery.min.js'"></script>
+    <script src="<?= url() ?>/assets/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
-    <script src="<?= url() ?>/assets/plugins/js/bootstrap.bundle.min.js'"></script>
+    <script src="<?= url() ?>/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="<?= url() ?>/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?= url() ?>/assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="<?= url() ?>/assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="<?= url() ?>/assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="<?= url() ?>/assets/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="<?= url() ?>/assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="<?= url() ?>/assets/plugins/jszip/jszip.min.js"></script>
+    <script src="<?= url() ?>/assets/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="<?= url() ?>/assets/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="<?= url() ?>/assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="<?= url() ?>/assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="<?= url() ?>/assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
     <!-- AdminLTE App -->
-    <script src="<?= url() ?>/assets/plugins/js/adminlte.min.js'"></script>
+    <script src="<?= url() ?>/assets/js/adminlte.min.js"></script>
     <!-- My Script -->
     <script src="../../assets/js/script.js"></script>
     <!-- Bootstrap script -->
