@@ -5,59 +5,39 @@
         unset($_POST['insert']);
         unset($_POST['id']);
 
-        if(verify_files($_FILES)["status"]){
-            if( verify_files($_FILES)["status"] !== "empty")
-            $_POST = upload_file($_POST, $_FILES);
-        
-            insert("bukus", $_POST);
-            $alert = [
-                'color' => 'success',
-                'msg' => 'Berhasil menambah buku'
-            ];    
-        }
-        else{
-            $alert = [
-                'color' => 'danger',
-                'msg' => verify_files($_FILES)["msg"]
-            ];
-        }
-        
+        $_POST = upload_file($_POST, $_FILES);
+    
+        insert("peminjamans", $_POST);
+        $alert = [
+            'color' => 'success',
+            'msg' => 'Berhasil menambah peminjaman'
+        ];            
         
     }
 
     if(isset($_POST['update'])){
         unset($_POST['update']);
 
-        if(verify_files($_FILES)["status"]){
-            if( verify_files($_FILES)["status"] !== "empty")
-                $_POST = upload_file($_POST, $_FILES);
-
-            update("bukus", $_POST, "id = $_POST[id]");
-            $alert = [
-                'color' => 'success',
-                'msg' => 'Berhasil mengubah buku'
-            ];    
-        }
-        else{
-            $alert = [
-                'color' => 'danger',
-                'msg' => verify_files($_FILES)["msg"]
-            ];
-        }
+        update("peminjamans", $_POST, "id = $_POST[id]");
+        $alert = [
+            'color' => 'success',
+            'msg' => 'Berhasil mengubah peminjaman'
+        ];    
+        
 
     }
     
     if(isset($_POST['delete'])){
-        delete("bukus", "id = $_POST[id]");
+        delete("peminjamans", "id = $_POST[id]");
         $alert = [
             'color' => 'success',
-            'msg' => 'Berhasil menghapus buku'
+            'msg' => 'Berhasil menghapus peminjaman'
         ];
     }
 ?>
 
 <?php 
-    $books = select_all_join("bukus", ['genres' => 'bukus.id_genre = genres.id'], "bukus.*, genres.genre");
+    $loans = select_all_join("peminjamans", ['bukus' => 'bukus.id = peminjamans.id_buku', 'users' => 'users.id = peminjamans.id_user'], "peminjamans.*, bukus.judul, users.nama");
 ?>
 
 <?php dashboard_open() ?>
@@ -65,7 +45,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Buku</h1>
+                    <h1 class="m-0">Peminjaman</h1>
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-6 ">
@@ -89,31 +69,29 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive p-0">
-                                <table class="table table-hover text-nowrap" id="datatable">
+                                <table class="table table-hover  text-nowrap" id="datatable">
                                     <thead>
                                         <tr>
                                             <th class="text-center">Judul</th>
-                                            <th class="text-center">Genre</th>
-                                            <th class="text-center">Jumlah</th>
-                                            <th class="text-center">Sinopsis</th>
-                                            <th class="text-center">Cover</th>
+                                            <th class="text-center">Nama Peminjam</th>
+                                            <th class="text-center">Tanggal Pinjam</th>
+                                            <th class="text-center">Tanggal Kembali</th>
+                                            <th class="text-center">Status</th>
                                             <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php if($books != NULL && count($books) > 0){ foreach ($books as $book) { ?>
+                                        <?php if($loans != NULL && count($loans) > 0){ foreach ($loans as $loan) { ?>
                                             <tr>
-                                                <td class="text-center"><?= $book['judul'] ?></td>
-                                                <td class="text-center"><?= $book['genre'] ?></td>
-                                                <td class="text-center"><?= $book['jumlah'] ?></td>
-                                                <td class="text-center"><?= $book['sinopsis'] ?></td>
+                                                <td class="text-center"><?= $loan['judul'] ?></td>
+                                                <td class="text-center"><?= $loan['nama'] ?></td>
+                                                <td class="text-center"><?= $loan['tanggal_pinjam'] ?></td>
+                                                <td class="text-center"><?= $loan['tanggal_kembali'] ?></td>
+                                                <td class="text-center"><?= $loan['status'] ? "sedang dipinjam" : "dikembalikan" ?></td>
                                                 <td class="text-center">
-                                                    <img height="100" src="<?= url() ?>/assets/upload/<?= $book['cover'] ? $book['cover'] : "noimage.png" ?>" alt="">
-                                                </td>
-                                                <td class="text-center">
-                                                    <button class="btn btn-success" onclick="setEditModal(<?= $book['id'] ?>)"><i class="fa fa-pencil " aria-hidden="true"></i> </button>
+                                                    <button class="btn btn-success" onclick="setEditModal(<?= $loan['id'] ?>)"><i class="fa fa-pencil " aria-hidden="true"></i> </button>
                                                     <form action="" method="POST" class="d-inline-block">
-                                                        <input type="hidden" name="id" value="<?= $book['id'] ?>">
+                                                        <input type="hidden" name="id" value="<?= $loan['id'] ?>">
                                                         <input type="hidden" name="delete" value="1">
                                                         <button  class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus?')"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                                     </form>
@@ -121,7 +99,7 @@
                                             </tr>  
                                         <?php }} else{ ?>
                                             <div class="alert alert-danger">
-                                                Data Buku belum tersedia
+                                                Data Peminjaman belum tersedia
                                             </div>
                                         <?php } ?>
                                         <?php if(isset($alert)){ ?>
@@ -149,7 +127,7 @@
     <form class="modal-dialog validation" role="document" method="POST" action="" enctype="multipart/form-data" novalidate>
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Tambah Buku</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Tambah Peminjaman</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -157,33 +135,41 @@
         <div class="modal-body">
             <input type="hidden" name="id">
             <div class="form-group">
-                <label for="judul">Judul</label>
-                <input type="text" name="judul" class="form-control"  placeholder="Masukkan judul" required>
+                <label for="genre">Buku</label>
+                <select name="id_buku" class="form-control" required>
+                    <option value="" id="phBuku" selected style="display: none;">Pilih Buku</option>
+                    <?php foreach (select_all('bukus') as $buku) { ?>
+                        <option value="<?= $buku['id'] ?>"><?= $buku['judul'] ?></option>
+                    <?php }?>
+                </select>
             </div>
             
             <div class="form-group">
-                <label for="genre">Genre</label>
-                <select name="id_genre" class="form-control" required>
-                    <option value="" id="phGenre" selected style="display: none;">Pilih Genre</option>
-                    <?php foreach (select_all('genres') as $genre) { ?>
-                        <option value="<?= $genre['id'] ?>"><?= $genre['genre'] ?></option>
+                <label for="genre">Peminjam</label>
+                <select name="id_user" class="form-control" required>
+                    <option value="" id="phUser" selected style="display: none;">Pilih User</option>
+                    <?php foreach (select_all('users') as $user) { ?>
+                        <option value="<?= $user['id'] ?>"><?= $user['nama'] ?></option>
                     <?php }?>
                 </select>
             </div>
 
             <div class="form-group">
-                <label for="judul">Jumlah</label>
-                <input type="number" name="jumlah" class="form-control"  placeholder="Masukkan jumlah buku" required>
+                <label for="judul">Tanggal Pinjam</label>
+                <input type="date" name="tanggal_pinjam" class="form-control"   required>
             </div>
 
             <div class="form-group">
-                <label for="judul">Sinopsis</label>
-                <textarea name="sinopsis" cols="30" rows="2" class="form-control" required></textarea>
+                <label for="judul">Tanggal Kembali</label>
+                <input type="date" name="tanggal_kembali" class="form-control"   required>
             </div>
 
             <div class="form-group">
-                <label for="judul">Cover</label>
-                <input type="file" name="cover" id="" class="form-control" >
+                <label for="judul">Status</label>
+                <select name="status" class="form-control" required>
+                    <option value="1" >Dipinjam</option>
+                    <option value="0" >Dikembalikan</option>
+                </select>
             </div>
             
         </div>
@@ -195,31 +181,42 @@
 </div>
 <script>
     
-    const bukus = JSON.parse('<?= addslashes(json_encode($books, JSON_UNESCAPED_UNICODE)) ?>')
-    console.log(bukus)
+    const loans = JSON.parse('<?= addslashes(json_encode($loans, JSON_UNESCAPED_UNICODE)) ?>')
 
     function setEditModal(id){
-        let buku = bukus.find(x => x.id == id)
-        $('.modal-title').html('Edit Buku')
+        let loan = loans.find(x => x.id == id)
+        $('.modal-title').html('Edit Peminjaman')
         $('#modalSubmit').attr('name', 'update')
 
-        $('input[name="judul"]').val(buku.judul)
-        $('input[name="jumlah"]').val(buku.jumlah)
-        $('textarea[name="sinopsis"]').html(buku.sinopsis)
-        $('select[name="id_genre"] option').each(function() {
-            if ($(this).val() == buku.id_genre)
+        $('input[name="tanggal_pinjam"]').val(loan.tanggal_pinjam)
+        $('input[name="tanggal_kembali"]').val(loan.tanggal_kembali)
+        $('select[name="id_user"] option').each(function() {
+            if ($(this).val() == loan.id_user)
+                $(this).prop('selected', true)
+            else
+                $(this).prop('selected', false)
+        })
+        $('select[name="id_buku"] option').each(function() {
+            if ($(this).val() == loan.id_buku)
+                $(this).prop('selected', true)
+            else
+                $(this).prop('selected', false)
+        })
+        $('select[name="status"] option').each(function() {
+            if ($(this).val() == loan.status)
                 $(this).prop('selected', true)
             else
                 $(this).prop('selected', false)
         })
 
-        $('input[name="id"]').val(buku.id)
-        $('#phGenre').attr('selected', 'false')
+        $('input[name="id"]').val(loan.id)
+        $('#phBuku').attr('selected', 'false')
+        $('#phUser').attr('selected', 'false')
         $('#exampleModal').modal('show');
     }
 
     function setInsertModal(){
-        $('.modal-title').html('Tambah Buku')
+        $('.modal-title').html('Tambah Peminjaman')
         $('#modalSubmit').attr('name', 'insert')
 
         $('input[name="judul"]').val('')
@@ -228,7 +225,8 @@
         $('form option').each(function()  {
             $(this).prop('selected', false)
         })
-        $('#phGenre').prop('selected', true)
+        $('#phBuku').attr('selected', true)
+        $('#phUser').attr('selected', true)
         $('#exampleModal').modal('show');
     }
 

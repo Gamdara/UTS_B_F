@@ -107,6 +107,8 @@
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <!-- kalo udah ada login, hapus 1 ||  -->
+                        <?php if(1 || $_SESSION['user']['role'] == "admin"){ ?>
                         <li class="nav-item">
                             <a href="<?= url() ?>/views/pages/admin/genre/index.php"class="nav-link">
                                 <i class="nav-icon far fa-circle"></i>
@@ -120,6 +122,21 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="<?= url() ?>/views/pages/admin/peminjaman/index.php"class="nav-link">
+                                <i class="nav-icon far fa-circle"></i>
+                                <p> Peminjaman</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= url() ?>/views/pages/admin/user/index.php"class="nav-link">
+                                <i class="nav-icon far fa-circle"></i>
+                                <p> User</p>
+                            </a>
+                        </li>
+                        <?php } ?>
+                        <!-- kalo udah ada login, hapus 1 ||  -->
+                        <?php if(1 ||  $_SESSION['user']['role'] == "user") { ?>
+                        <li class="nav-item">
                             <a href="<?= url() ?>/views/pages/user/booklist.php"class="nav-link">
                                 <i class="nav-icon far fa-circle"></i>
                                 <p> List buku</p>
@@ -131,7 +148,7 @@
                                 <p> User buku</p>
                             </a>
                         </li>
-                        
+                        <?php } ?>
                     </ul>
                 </nav>
             <!-- /.sidebar-menu -->
