@@ -25,7 +25,7 @@
               <legend>DAFTAR</legend>
               <p>Selamat Datang di Perpustakaan Kita,<br>Silakan melakukan daftar akun untuk dapat melanjutkan...</p>
               <div class="card bg-transparent m-4 mt-5 p-4 ">
-                  <form action="#" method="post" enctype="multipart/form-data">
+                  <form action="../process/auth/register.php" method="post" enctype="multipart/form-data">
                         <div class="mb-3">
                           <label for="input1" class="form-label">Nama</label>
                           <input

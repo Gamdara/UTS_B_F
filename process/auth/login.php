@@ -1,5 +1,5 @@
 <?php
-    if(isset($_POST['login'])){
+    if(isset($_POST['masuk'])){
         include('../db.php'); 
         
         $email = $_POST['email'];
