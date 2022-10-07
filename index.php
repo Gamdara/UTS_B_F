@@ -1,4 +1,6 @@
-<!-- <script>
-    location.href = "views/pages/admin/dashboard.php";
-</script> -->
-<?php echo dirname(__FILE__); ?>
+<?php 
+    include "./process/functions.php";
+    //ntar arahin ke login page
+    header("location: ".url()."/views/pages/admin/dashboard.php");
+    die();
+?>

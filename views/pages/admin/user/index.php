@@ -7,12 +7,13 @@
 
         if(verify_files($_FILES)["status"]){
             if( verify_files($_FILES)["status"] !== "empty")
-            $_POST = upload_file($_POST, $_FILES);
-        
-            insert("bukus", $_POST);
+                $_POST = upload_file($_POST, $_FILES);
+            
+            $_POST['password'] = md5($_POST['password']);
+            insert("users", $_POST);
             $alert = [
                 'color' => 'success',
-                'msg' => 'Berhasil menambah buku'
+                'msg' => 'Berhasil menambah user'
             ];    
         }
         else{
@@ -21,8 +22,6 @@
                 'msg' => verify_files($_FILES)["msg"]
             ];
         }
-        
-        
     }
 
     if(isset($_POST['update'])){
@@ -32,10 +31,11 @@
             if( verify_files($_FILES)["status"] !== "empty")
                 $_POST = upload_file($_POST, $_FILES);
 
-            update("bukus", $_POST, "id = $_POST[id]");
+            $_POST['password'] = md5($_POST['password']);
+            update("users", $_POST, "id = $_POST[id]");
             $alert = [
                 'color' => 'success',
-                'msg' => 'Berhasil mengubah buku'
+                'msg' => 'Berhasil mengubah user'
             ];    
         }
         else{
@@ -48,16 +48,16 @@
     }
     
     if(isset($_POST['delete'])){
-        delete("bukus", "id = $_POST[id]");
+        delete("users", "id = $_POST[id]");
         $alert = [
             'color' => 'success',
-            'msg' => 'Berhasil menghapus buku'
+            'msg' => 'Berhasil menghapus user'
         ];
     }
 ?>
 
 <?php 
-    $books = select_all_join("bukus", ['genres' => 'bukus.id_genre = genres.id'], "bukus.*, genres.genre");
+    $users = select_all("users");
 ?>
 
 <?php dashboard_open() ?>
@@ -65,7 +65,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Buku</h1>
+                    <h1 class="m-0">User</h1>
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-6 ">
@@ -92,28 +92,26 @@
                                 <table class="table table-hover text-nowrap" id="datatable">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">Judul</th>
-                                            <th class="text-center">Genre</th>
-                                            <th class="text-center">Jumlah</th>
-                                            <th class="text-center">Sinopsis</th>
-                                            <th class="text-center">Cover</th>
+                                            <th class="text-center">Nama</th>
+                                            <th class="text-center">Email</th>
+                                            <th class="text-center">Foto</th>
+                                            <th class="text-center">Role</th>
                                             <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php if($books != NULL && count($books) > 0){ foreach ($books as $book) { ?>
+                                        <?php if($users != NULL && count($users) > 0){ foreach ($users as $user) { ?>
                                             <tr>
-                                                <td class="text-center"><?= $book['judul'] ?></td>
-                                                <td class="text-center"><?= $book['genre'] ?></td>
-                                                <td class="text-center"><?= $book['jumlah'] ?></td>
-                                                <td class="text-center"><?= $book['sinopsis'] ?></td>
+                                                <td class="text-center"><?= $user['nama'] ?></td>
+                                                <td class="text-center"><?= $user['email'] ?></td>
                                                 <td class="text-center">
-                                                    <img height="100" src="<?= url() ?>/assets/upload/<?= $book['cover'] ? $book['cover'] : "noimage.png" ?>" alt="">
+                                                    <img height="100" src="<?= url() ?>/assets/upload/<?= $user['foto'] ? $user['foto'] : "noimage.png" ?>" alt="">
                                                 </td>
+                                                <td class="text-center"><?= $user['role'] ?></td>
                                                 <td class="text-center">
-                                                    <button class="btn btn-success" onclick="setEditModal(<?= $book['id'] ?>)"><i class="fa fa-pencil " aria-hidden="true"></i> </button>
+                                                    <button class="btn btn-success" onclick="setEditModal(<?= $user['id'] ?>)"><i class="fa fa-pencil " aria-hidden="true"></i> </button>
                                                     <form action="" method="POST" class="d-inline-block">
-                                                        <input type="hidden" name="id" value="<?= $book['id'] ?>">
+                                                        <input type="hidden" name="id" value="<?= $user['id'] ?>">
                                                         <input type="hidden" name="delete" value="1">
                                                         <button  class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus?')"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                                     </form>
@@ -121,7 +119,7 @@
                                             </tr>  
                                         <?php }} else{ ?>
                                             <div class="alert alert-danger">
-                                                Data Buku belum tersedia
+                                                Data User belum tersedia
                                             </div>
                                         <?php } ?>
                                         <?php if(isset($alert)){ ?>
@@ -149,41 +147,40 @@
     <form class="modal-dialog validation" role="document" method="POST" action="" enctype="multipart/form-data" novalidate>
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Tambah Buku</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Tambah User</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
         <div class="modal-body">
             <input type="hidden" name="id">
+            
             <div class="form-group">
-                <label for="judul">Judul</label>
-                <input type="text" name="judul" class="form-control"  placeholder="Masukkan judul" required>
+                <label for="judul">Nama</label>
+                <input type="text" name="nama" class="form-control"  placeholder="Masukkan nama" required>
             </div>
             
             <div class="form-group">
-                <label for="genre">Genre</label>
-                <select name="id_genre" class="form-control" required>
-                    <option value="" id="phGenre" selected style="display: none;">Pilih Genre</option>
-                    <?php foreach (select_all('genres') as $genre) { ?>
-                        <option value="<?= $genre['id'] ?>"><?= $genre['genre'] ?></option>
-                    <?php }?>
+                <label for="judul">Email</label>
+                <input type="text" name="email" class="form-control"  placeholder="Masukkan email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="judul">Password Baru</label>
+                <input type="text" name="password" class="form-control"  placeholder="Masukkan password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="judul">Role</label>
+                <select name="role" class="form-control" required>
+                    <option value="user" >User</option>
+                    <option value="admin" >Admin</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label for="judul">Jumlah</label>
-                <input type="number" name="jumlah" class="form-control"  placeholder="Masukkan jumlah buku" required>
-            </div>
-
-            <div class="form-group">
-                <label for="judul">Sinopsis</label>
-                <textarea name="sinopsis" cols="30" rows="2" class="form-control" required></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="judul">Cover</label>
-                <input type="file" name="cover" id="" class="form-control" >
+                <label for="judul">Foto</label>
+                <input type="file" name="foto" id="" class="form-control" >
             </div>
             
         </div>
@@ -195,40 +192,39 @@
 </div>
 <script>
     
-    const bukus = JSON.parse('<?= addslashes(json_encode($books, JSON_UNESCAPED_UNICODE)) ?>')
-    console.log(bukus)
+    const users = JSON.parse('<?= addslashes(json_encode($users, JSON_UNESCAPED_UNICODE)) ?>')
+    console.log(users)
 
     function setEditModal(id){
-        let buku = bukus.find(x => x.id == id)
-        $('.modal-title').html('Edit Buku')
+        let user = users.find(x => x.id == id)
+        $('.modal-title').html('Edit User')
         $('#modalSubmit').attr('name', 'update')
 
-        $('input[name="judul"]').val(buku.judul)
-        $('input[name="jumlah"]').val(buku.jumlah)
-        $('textarea[name="sinopsis"]').html(buku.sinopsis)
-        $('select[name="id_genre"] option').each(function() {
-            if ($(this).val() == buku.id_genre)
+        $('input[name="nama"]').val(user.nama)
+        $('input[name="email"]').val(user.email)
+        
+        $('select[name="role"] option').each(function() {
+            if ($(this).val() == user.role)
                 $(this).prop('selected', true)
             else
                 $(this).prop('selected', false)
         })
 
-        $('input[name="id"]').val(buku.id)
-        $('#phGenre').attr('selected', 'false')
+        $('input[name="id"]').val(user.id)
         $('#exampleModal').modal('show');
     }
 
     function setInsertModal(){
-        $('.modal-title').html('Tambah Buku')
+        $('.modal-title').html('Tambah User')
         $('#modalSubmit').attr('name', 'insert')
 
-        $('input[name="judul"]').val('')
-        $('input[name="jumlah"]').val('')
-        $('textarea[name="sinopsis"]').html('')
+        $('input[name="nama"]').val('')
+        $('input[name="email"]').val('')
+        
         $('form option').each(function()  {
             $(this).prop('selected', false)
         })
-        $('#phGenre').prop('selected', true)
+
         $('#exampleModal').modal('show');
     }
 

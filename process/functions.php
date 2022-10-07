@@ -80,7 +80,7 @@
         foreach($joins as $tabl => $conn){
             $on .= " join $tabl on $conn ";
         }
-        return mysqli_fetch_all(execute_query("select $colums from $table $on where $cond"), MYSQLI_ASSOC);
+        return mysqli_fetch_all(execute_query("select $columns from $table $on where $cond"), MYSQLI_ASSOC);
     }
     
 
