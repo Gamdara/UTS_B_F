@@ -1,6 +1,7 @@
 <?php
-    if(isset($_POST['masuk'])){
+    if(isset($_POST['submit'])){
         include('../db.php'); 
+        include ("../../../process/functions.php");
         
         $email = $_POST['email'];
         $password = $_POST['password'];

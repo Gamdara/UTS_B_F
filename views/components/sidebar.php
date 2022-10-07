@@ -2,6 +2,8 @@
     
     require_once (dirname(__FILE__, 3).'/process/db.php') ;
     require_once (dirname(__FILE__, 3).'/process/functions.php') ;
+
+    
 ?>
 <?php  function dashboard_open(){ ?>
 <!DOCTYPE html>

@@ -1,5 +1,5 @@
 <?php
-    if(isset($_POST['register'])){
+    if(isset($_POST['daftar'])){
     
         include('../db.php');
         
@@ -20,7 +20,7 @@
             echo
                 '<script>
                 alert("Email harus unik!");
-                window.location = "../page/registerPage.php"
+                window.location = "../views/pages/user/registerPage.php"
                 </script>';
             die();
         }
