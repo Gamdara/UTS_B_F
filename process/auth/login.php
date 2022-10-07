@@ -12,7 +12,7 @@
         if(mysqli_num_rows($query) == 0){
             echo
             '<script>
-            alert("Email not found!"); window.location = "../page/loginPage.php"
+            alert("Email not found!"); window.location = "../../views/pages/user/loginPage.php"
             </script>';
         }else{
             $user = mysqli_fetch_assoc($query);

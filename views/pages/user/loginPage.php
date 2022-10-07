@@ -29,7 +29,7 @@
                 <legend>MASUK</legend>
                 <p>Selamat Datang di Perpustakaan Kita,<br>Silakan Masuk untuk melanjutkan...</p>
                 <div class="card bg-transparent m-4 mt-5 p-4 ">
-                    <form action="../process/auth/login.php" method="post">
+                    <form action="../../../process/auth/login.php" method="post">
                           <div class="mb-3">
                             <label for="input1" class="form-label">Email</label>
                             <input
