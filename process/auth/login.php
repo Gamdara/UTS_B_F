@@ -24,13 +24,13 @@
                 $_SESSION['user'] = $user;
                 echo
                 '<script>
-                alert("Login Success"); window.location = "../page/dashboardPage.php"
+                alert("Login Success"); window.location = "../../views/pages/admin/dashboard.php"
                 </script>';
             }else {
                 echo
                 '<script>
                 alert("Email or Password Invalid");
-                window.location = "../page/loginPage.php"
+                window.location = "../../views/pages/user/loginPage.php"
                 </script>';
             }
         }

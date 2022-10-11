@@ -20,7 +20,7 @@
             echo
                 '<script>
                 alert("Email harus unik!");
-                window.location = "../views/pages/user/registerPage.php"
+                window.location = "../../views/pages/user/regisPage.php"
                 </script>';
             die();
         }
