@@ -3,15 +3,17 @@
     
         include('../db.php');
         
-        $id = $_POST['id'];
+        //$id = $_POST['id'];
         $email = $_POST['email'];
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $nama = $_POST['nama'];
-        $foto = $_POST['foto'];
-        $img = "../img/";
-        $namafoto = $id.".jpg";
-        $temp = $_FILES['img']['tmp_name'];
-        $tujuan = $img.$namafoto;
+        $foto = $_FILES['foto']['name'];
+        // $x = explode('.', $foto);
+        // $ekstensi = strtolower(end($x));
+        // $img = "../img/";
+        // $namafoto = $id.".jpg";
+        $temp = $_FILES['foto']['tmp_name'];
+        // $tujuan = $img.$namafoto;
         
 
         $query = mysqli_query($con, "SELECT * FROM users WHERE email = '$email'");
@@ -25,7 +27,7 @@
             die();
         }
         
-        if(move_uploaded_file($temp,$tujuan)){
+        if(move_uploaded_file($temp,'../../views/pages/user/image/'.$foto)){
         
             $query = mysqli_query($con,
             "INSERT INTO users(email, password, nama, foto) 
@@ -36,7 +38,7 @@
             echo
                 '<script>
                 alert("Register Success"); 
-                window.location = "../index.php"
+                window.location = "../../index.php"
                 </script>';
         }else{
             echo

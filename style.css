@@ -11,7 +11,7 @@ body{
     font-family: 'Inter', sans-serif;
     height: 100vh;
     background: linear-gradient(10deg, rgba(134, 197, 255, 0.22), rgba(134, 197, 255, 0.7)), 
-                url("image/background.jpg");
+                url("./views/pages/user/image/background.jpg");
     background-position: center;
     background-size: cover;
     background-attachment: fixed;
