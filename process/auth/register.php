@@ -27,7 +27,7 @@
             die();
         }
         
-        if(move_uploaded_file($temp,'../../views/pages/user/image/'.$foto)){
+        if(move_uploaded_file($temp,'../../assets/upload/'.$foto)){
         
             $query = mysqli_query($con,
             "INSERT INTO users(email, password, nama, foto) 
