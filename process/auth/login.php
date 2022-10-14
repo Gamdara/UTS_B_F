@@ -1,7 +1,7 @@
 <?php
     if(isset($_POST['submit'])){
         include('../db.php'); 
-        include ("../../../process/functions.php");
+        include ("../functions.php");
         
         $email = $_POST['email'];
         $password = $_POST['password'];
@@ -17,8 +17,6 @@
         }else{
             $user = mysqli_fetch_assoc($query);
             if(password_verify($password, $user['password'])){
-        
-                session_start();
         
                 $_SESSION['isLogin'] = true;
                 $_SESSION['user'] = $user;

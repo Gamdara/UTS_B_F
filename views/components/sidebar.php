@@ -2,6 +2,14 @@
     require_once (dirname(__FILE__, 3).'/process/db.php') ;
     require_once (dirname(__FILE__, 3).'/process/functions.php') ;
 
+    if(!isset($_SESSION['user'])){
+        echo"
+        <script>
+            alert('Silahkan Login dulu');
+            window.location.href = '".url()."';
+        </script>
+        ";
+    }
     
 ?>
 <?php  function dashboard_open(){ ?>
@@ -80,8 +88,8 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="#" class="brand-link">
-                <img src="<?= url() ?>/assets/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">Perpus Kita</span>
+                <img src="<?= url() ?>/assets/img/PerpusKita.png" alt="AdminLTE Logo" width="200px" class="brand-text m-3 font-weight-light" style="opacity: .8">
+                <!-- <span >a</span> -->
             </a>
             <!-- Sidebar -->
             <div class="sidebar">
@@ -110,7 +118,7 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- kalo udah ada login, hapus 1 ||  -->
-                        <?php if(1 || $_SESSION['user']['role'] == "admin"){ ?>
+                        <?php if($_SESSION['user']['role'] == "admin"){ ?>
                         <li class="nav-item">
                             <a href="<?= url() ?>/views/pages/admin/genre/index.php"class="nav-link">
                                 <i class="nav-icon far fa-circle"></i>
@@ -137,7 +145,7 @@
                         </li>
                         <?php } ?>
                         <!-- kalo udah ada login, hapus 1 ||  -->
-                        <?php if(1 ||  $_SESSION['user']['role'] == "user") { ?>
+                        <?php if($_SESSION['user']['role'] == "user") { ?>
                         <li class="nav-item">
                             <a href="<?= url() ?>/views/pages/user/booklist.php"class="nav-link">
                                 <i class="nav-icon far fa-circle"></i>
@@ -151,6 +159,12 @@
                             </a>
                         </li>
                         <?php } ?>
+                        <li class="nav-item">
+                            <a href="<?= url() ?>/process/auth/logout.php"class="nav-link">
+                                <i class="nav-icon far fa-logout"></i>
+                                <p> Logout</p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             <!-- /.sidebar-menu -->
