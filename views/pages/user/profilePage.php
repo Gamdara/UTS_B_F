@@ -14,7 +14,8 @@
                 </div>
                 <hr>
                 <form>
-                <img src="$data['foto']" width='90' height='90' style="border-radius: 50%"/>
+                <img height="100" src="<?= url() ?>/assets/upload/<?= $data['foto'] ? $data['foto'] : "noimage.png" ?>" alt="" style="border-radius: 50%">
+                
                     <div class="mb-3">
                       <label for="input1" class="form-label">Nama</label>
                       <input
