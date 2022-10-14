@@ -1,11 +1,11 @@
 <?php 
-    
     require_once (dirname(__FILE__, 3).'/process/db.php') ;
     require_once (dirname(__FILE__, 3).'/process/functions.php') ;
 
     
 ?>
 <?php  function dashboard_open(){ ?>
+   
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -81,18 +81,18 @@
             <!-- Brand Logo -->
             <a href="#" class="brand-link">
                 <img src="<?= url() ?>/assets/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">Amsang Tech</span>
+                <span class="brand-text font-weight-light">Perpus Kita</span>
             </a>
             <!-- Sidebar -->
             <div class="sidebar">
             <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="<?= url() ?>/assets/img/user2-160x160.jpg"
+                        <img src="<?= url() ?>/assets/upload/<?= $_SESSION['user']['foto'] ? $_SESSION['user']['foto'] : "user2-160x160.jpg" ?>"
                         class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="<?= url() ?>/views/pages/admin/dashboard.php" class="d-block">ADMIN</a>
+                        <a href="<?= url() ?>/views/pages/user/editProfilePage.php" class="d-block"><?= $_SESSION['user']['nama'] ?></a>
                     </div>
                 </div>
                 <!-- SidebarSearch Form -->
