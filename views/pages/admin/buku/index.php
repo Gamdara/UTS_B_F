@@ -48,11 +48,20 @@
     }
     
     if(isset($_POST['delete'])){
-        delete("bukus", "id = $_POST[id]");
-        $alert = [
-            'color' => 'success',
-            'msg' => 'Berhasil menghapus buku'
-        ];
+        $loan = select("peminjamans", "id_buku = $_POST[id] and status = 1");
+        if($loan != null || count( $loan > 0 )){
+            $alert = [
+                'color' => 'danger',
+                'msg' => 'Gagal menghapus buku, buku sedang dipinjam'
+            ];
+        }
+        else{
+            delete("bukus", "id = $_POST[id]");
+            $alert = [
+                'color' => 'success',
+                'msg' => 'Berhasil menghapus buku'
+            ];
+        }
     }
 ?>
 
@@ -89,6 +98,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive p-0">
+                             
                                 <table class="table table-hover text-nowrap" id="datatable">
                                     <thead>
                                         <tr>
@@ -111,6 +121,7 @@
                                                     <img height="100" src="<?= url() ?>/assets/upload/<?= $book['cover'] ? $book['cover'] : "noimage.png" ?>" alt="">
                                                 </td>
                                                 <td class="text-center">
+                                                    <a href="./detail.php?id=<?= $book['id'] ?>"><button class="btn btn-primary" ><i class="fa fa-eye " aria-hidden="true"></i> </button></a>
                                                     <button class="btn btn-success" onclick="setEditModal(<?= $book['id'] ?>)"><i class="fa fa-pencil " aria-hidden="true"></i> </button>
                                                     <form action="" method="POST" class="d-inline-block">
                                                         <input type="hidden" name="id" value="<?= $book['id'] ?>">

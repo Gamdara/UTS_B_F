@@ -3,13 +3,14 @@
 <?php 
     if(isset($_POST['insert'])){
         unset($_POST['insert']);
+        unset($_POST['passwordLama']);
         unset($_POST['id']);
 
         if(verify_files($_FILES)["status"]){
             if( verify_files($_FILES)["status"] !== "empty")
                 $_POST = upload_file($_POST, $_FILES);
             
-            $_POST['password'] = md5($_POST['password']);
+            $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
             insert("users", $_POST);
             $alert = [
                 'color' => 'success',
@@ -26,24 +27,37 @@
 
     if(isset($_POST['update'])){
         unset($_POST['update']);
-
-        if(verify_files($_FILES)["status"]){
-            if( verify_files($_FILES)["status"] !== "empty")
-                $_POST = upload_file($_POST, $_FILES);
-
-            $_POST['password'] = md5($_POST['password']);
-            update("users", $_POST, "id = $_POST[id]");
-            $alert = [
-                'color' => 'success',
-                'msg' => 'Berhasil mengubah user'
-            ];    
-        }
-        else{
+        
+        $userLama = select('users', "id = $_POST[id]")[0];
+        
+        if(!password_verify ($_POST['passwordLama'],  $userLama['password'] ) ){
             $alert = [
                 'color' => 'danger',
-                'msg' => verify_files($_FILES)["msg"]
-            ];
+                'msg' => 'Password lama tidak sesuai'
+            ]; 
         }
+
+        else{
+            if(verify_files($_FILES)["status"]){
+                if( verify_files($_FILES)["status"] !== "empty")
+                    $_POST = upload_file($_POST, $_FILES);
+    
+                unset($_POST['passwordLama']);
+                $_POST['password'] = md5($_POST['password']);
+                update("users", $_POST, "id = $_POST[id]");
+                $alert = [
+                    'color' => 'success',
+                    'msg' => 'Berhasil mengubah user'
+                ];    
+            }
+            else{
+                $alert = [
+                    'color' => 'danger',
+                    'msg' => verify_files($_FILES)["msg"]
+                ];
+            }
+        }
+
 
     }
     
@@ -110,13 +124,16 @@
                                                 <td class="text-center"><?= $user['role'] ?></td>
                                                 <td class="text-center">
                                                     <button class="btn btn-success" onclick="setEditModal(<?= $user['id'] ?>)"><i class="fa fa-pencil " aria-hidden="true"></i> </button>
-                                                    <form action="" method="POST" class="d-inline-block">
-                                                        <input type="hidden" name="id" value="<?= $user['id'] ?>">
-                                                        <input type="hidden" name="delete" value="1">
-                                                        <button  class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus?')"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                                    </form>
+                                                    <?php if($user['role'] !== "admin"){ ?>
+                                                        <form action="" method="POST" class="d-inline-block">
+                                                            <input type="hidden" name="id" value="<?= $user['id'] ?>">
+                                                            <input type="hidden" name="delete" value="1">
+                                                            <button  class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus?')"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                        </form>
+                                                    <?php } ?>
                                                 </td>
                                             </tr>  
+                                            
                                         <?php }} else{ ?>
                                             <div class="alert alert-danger">
                                                 Data User belum tersedia
@@ -165,18 +182,23 @@
                 <input type="text" name="email" class="form-control"  placeholder="Masukkan email" required>
             </div>
 
-            <div class="form-group">
-                <label for="judul">Password Baru</label>
-                <input type="text" name="password" class="form-control"  placeholder="Masukkan password" required>
+            <div class="form-group" id="passlama">
+                <label for="judul">Password Lama</label>
+                <input type="text" name="passwordLama" class="form-control"  placeholder="Masukkan password" required>
             </div>
 
             <div class="form-group">
+                <label for="judul">Password </label>
+                <input type="text" name="password" class="form-control"  placeholder="Masukkan password" required>
+            </div>
+
+            <!-- <div class="form-group">
                 <label for="judul">Role</label>
                 <select name="role" class="form-control" required>
                     <option value="user" >User</option>
                     <option value="admin" >Admin</option>
                 </select>
-            </div>
+            </div> -->
 
             <div class="form-group">
                 <label for="judul">Foto</label>
@@ -193,16 +215,19 @@
 <script>
     
     const users = JSON.parse('<?= addslashes(json_encode($users, JSON_UNESCAPED_UNICODE)) ?>')
-    console.log(users)
 
     function setEditModal(id){
         let user = users.find(x => x.id == id)
+        $('#passlama').css("display","block");
+        $('#passlama input').prop('required', true)
         $('.modal-title').html('Edit User')
         $('#modalSubmit').attr('name', 'update')
 
         $('input[name="nama"]').val(user.nama)
         $('input[name="email"]').val(user.email)
         
+
+
         $('select[name="role"] option').each(function() {
             if ($(this).val() == user.role)
                 $(this).prop('selected', true)
@@ -215,6 +240,8 @@
     }
 
     function setInsertModal(){
+        $('#passlama input').prop('required', false)
+        $('#passlama').css("display","none");
         $('.modal-title').html('Tambah User')
         $('#modalSubmit').attr('name', 'insert')
 
