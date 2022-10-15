@@ -99,10 +99,13 @@
         return execute_query("insert into $table($column) values($value)");
     }
 
-    function update($table, $data, $cond){
+    function update($table, $data, $cond, $escape = false){
         $set = "";
         
         foreach($data as $key => $value){
+            if($escape)
+            $set .= "$key=$value,";
+            else
             $set .= "$key='$value',";
         }
 

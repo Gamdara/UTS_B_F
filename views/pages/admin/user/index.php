@@ -128,7 +128,7 @@
                                                         <form action="" method="POST" class="d-inline-block">
                                                             <input type="hidden" name="id" value="<?= $user['id'] ?>">
                                                             <input type="hidden" name="delete" value="1">
-                                                            <button  class="btn btn-danger" onclick="return sweetConfirm(this)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                            <button  class="btn btn-danger" onclick="return sweetConfirm(this, 'Yakin ingin menghapus?')"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                                         </form>
                                                     <?php } ?>
                                                 </td>

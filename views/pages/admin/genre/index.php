@@ -45,12 +45,6 @@
                     <button class="btn btn-primary rounded-circle shadow float-sm-right" onclick="setInsertModal()">
                         <i class="fa fa-plus" aria-hidden="true"></i>
                     </button>
-                    <!-- <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item">
-                            <a href="<?= url() ?>/views/pages/admin/genre/index.php">Genre</a>
-                        </li>
-                        <li class="breadcrumb-item active">Index</li>
-                    </ol> -->
                 </div>
                 
                     <!-- /.col -->
@@ -85,7 +79,7 @@
                                                     <form action="" method="POST" class="d-inline-block">
                                                         <input type="hidden" name="id" value="<?= $genre['id'] ?>">
                                                         <input type="hidden" name="delete" value="1">
-                                                        <button  class="btn btn-danger" onclick="return sweetConfirm(this)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                        <button  class="btn btn-danger" onclick="return sweetConfirm(this, 'Yakin ingin menghapus?')"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                                     </form>
                                                 </td>
                                             </tr>  
@@ -135,7 +129,6 @@
         </div>
     </form>
 </div>
-<?php var_dump($_SESSION['alert']); ?>
 <script>
     const genres = JSON.parse('<?= json_encode($genres) ?>')
     function setEditModal(id){

@@ -1,86 +1,110 @@
 <?php
 require "../../components/sidebar.php"
 ?>
+<?php 
+  if(!empty($_POST)){
+    unset($_POST['update']);
+    update("peminjamans", ['status' => '1'], "id = $_POST[id]");
+    update("bukus", ['jumlah' => 'jumlah + 1'], "id = $_POST[id_buku]", true);
+    $_SESSION['alert'] = [
+        'color' => 'success',
+        'msg' => 'Berhasil mengembalikan'
+    ];
+  }
+?>
 <?php
-$loans = select_foreign("peminjamans","bukus","1");
-
-
+$loans = select_join("peminjamans",["bukus" => "bukus.id = peminjamans.id_buku"], "id_user = ".$_SESSION['user']['id'], "peminjamans.*, bukus.judul, bukus.cover");
 ?>
 <?php
 dashboard_open()
 ?>
-  <link rel="stylesheet" href="../../../assets/css/style.css">
-  <div class="form-popup" id="myForm">
-      <form action="/action_page.php" class="form-container">
-          <h1>Konfirmasi Pengembalian</h1>
-          <input type="hidden" id="idbook" name="book_id">
-          <button type="submit" class="btn">Yes</button>
-          <button type="button" class="btn cancel" onclick="closeForm()" value="1">Close</button>
-      </form>
-  </div>
-
-  <div class="container" id="table-book">
-    <!-- Content -->
-    <h1>Daftar Buku Yang Dipinjam</h1>
-        <!-- Table Book -->
-        <table class="table" >
-        <thead>
-            <tr>
-            <th scope="col">Judul Buku</th>
-            <th scope="col">Cover Buku</th>
-            <th scope="col">Status Peminjaman</th>
-            <th scope="col">Batas pengembalian</th>
-            <th scope="col">Pengembalian Buku</th>
-            </tr>
-        </thead>
-
-        <!-- Fetch Data from Database -->
-        <?php if($loans != NULL && count($loans) > 0){ foreach ($loans as $loan) { ?>
-        <tbody>
-          <tr>
-            <td class="text-center"><?= $loan['judul'] ?></td>
-            <td><img src="../../../assets/upload/coverBook/<?= $loan['cover'] ?>.jpg" alt=""></td>
-            <?php if($loan['status'] == 0){
-                $loan['status'] = 'dipinjam';
-              ?> 
-                <td><?= $loan['status'] ?></td>
-              <?php } else{ 
-                $loan['status'] = 'Sudah dikembalikan';
-              ?>
-                <td><?= $loan['status'] ?></td>
-              <?php } ?>
-            <td><?= $loan['tanggal_kembali'] ?></td>
-            <?php if($loan['status'] != 'dipinjam'){?>
-              <td><button type="button" class="btn btn-primary" onclick="openForm()" value="<?= $loan['id'] ?>">Kembalikan</button></td>
-              <?php } else{ ?>
-              <td><div type="button" class="btn btn-danger" value="<?= $loan['id'] ?>">Kembalikan</div></td>
-              <?php } ?>
-          </tr>
-        </tbody>                 
-        <?php }} else{ ?>
-          <div class="alert alert-danger">
-            Data Buku belum tersedia
-          </div>
-        <?php } ?>
-        
-        </table>
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Daftar Buku Yang Dipinjam</h1>
+                </div>
+            </div>
+        </div>
     </div>
-  <script src="../../../assets/js/script.js"></script>
+ 
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive p-0">
+                                
+                                <table class="table table-hover text-nowrap" id="datatable">
+                                <thead>
+                                    <tr>
+                                    <th scope="col">Judul Buku</th>
+                                    <th scope="col">Cover Buku</th>
+                                    <th scope="col">Status Peminjaman</th>
+                                    <th scope="col">Batas pengembalian</th>
+                                    <th scope="col">Pengembalian Buku</th>
+                                    </tr>
+                                </thead>
+
+                                <!-- Fetch Data from Database -->
+                                <tbody>
+                                  <?php if($loans != NULL && count($loans) > 0){ foreach ($loans as $loan) { ?>
+                                  <tr>
+                                    <td class="text-center"><?= $loan['judul'] ?></td>
+                                    <td  class="text-center"><img height="200" src="<?=url()?>/assets/upload/<?= $loan['cover'] ? $loan['cover'] : 'noimage.png' ?>" alt=""></td>
+                                    <td  class="text-center"><?= $loan['status'] ? 'dikembalikan' : 'dipinjam' ?></td>
+                                    <td  class="text-center"><?= $loan['tanggal_kembali'] ?></td>
+                                    <td  class="text-center">
+                                      <?php if(!$loan['status']) { ?> 
+                                        
+                                        <form action="" method="POST" class="d-inline-block">
+                                          <input type="hidden" name="id" value="<?= $loan['id'] ?>">
+                                          <input type="hidden" name="id_buku" value="<?= $loan['id_buku'] ?>">
+                                          <input value="Kembalikan" type="submit" name="update" class="btn btn-primary" onclick="return sweetConfirm(this, 'Yakin Mengembalikan?')" >
+                                        </form>
+                                        <?php } else{ ?>
+                                          dikembalikan
+                                        <?php } ?>
+                                    </td>
+                                  </tr>
+                                  <?php }} else{ ?>
+                                    <tr>
+                                        <td class="text-center" colspan="5">
+                                            Data Peminjaman belum tersedia
+                                        </td>
+                                      <tr>
+                                  <?php } ?>
+                                </tbody>           
+                                </table>
+                            </div>
+                        </div>
+                    <!-- /.card-body -->
+                    </div>
+                <!-- /.card -->
+                </div>
+            <!-- /.col-md-6 -->
+            </div>
+        <!-- /.row -->
+        </div>
+    <!-- /.container-fluid -->
+    </div>
+
+  
 <?php 
 dashboard_close()
 ?>
 
-          <tbody> 
-            <tr>   
-              <?php if($loan['status'] == 0){
-                $loan['status'] = 'dipinjam';
-              ?>              
-              <td><div type="button" class="btn btn-danger" value="<?= $loan['id'] ?>">Kembalikan</div></td>
-              <?php } else{ 
-                $loan['status'] = 'Sudah dikembalikan';
-              ?> 
+<script>
+   if ( window.history.replaceState ) {
+       window.history.replaceState( null, null, window.location.href );
+    }
+  $(function () {
+        $(".table").DataTable({
+        "pageLength": 5,
+        "responsive": true, "lengthChange": true, "autoWidth": true
+        }).buttons().container().appendTo('#datatable_wrapper .col-md-6:eq(0)');
+    });
 
-              <td><button type="button" class="btn btn-primary" onclick="openForm()" value="<?= $loan['id'] ?>">Kembalikan</button></td> 
-              <?php } ?>
-            </tr>
-          </tbody>          
+</script>
+        

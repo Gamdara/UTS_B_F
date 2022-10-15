@@ -232,10 +232,10 @@ function dashboard_close(){ ?>
     </script>
 
     <script>
-        function sweetConfirm(e){
+        function sweetConfirm(e, msg){
           
             Swal.fire({
-            title: 'Yakin ingin menghapus?',
+            title: msg,
             showDenyButton: true,
             confirmButtonText: 'Ya',
             icon : 'question',
