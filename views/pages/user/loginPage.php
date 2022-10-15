@@ -1,4 +1,4 @@
-<?php include"../../../process/functions.php"; session_start(); ?>
+<?php include"../../../process/functions.php";  ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

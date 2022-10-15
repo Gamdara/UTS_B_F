@@ -2,6 +2,7 @@
     if(isset($_POST['daftar'])){
     
         include('../db.php');
+        include('../functions.php');
         
         //$id = $_POST['id'];
         $email = $_POST['email'];

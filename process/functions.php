@@ -1,6 +1,6 @@
 <?php 
     // include ("../process/db.php");
-
+    session_start();
     function url(){
         if(isset($_SERVER['HTTPS'])){
             $protocol = ($_SERVER['HTTPS'] && $_SERVER['HTTPS'] != "off") ? "https" : "http";
