@@ -168,7 +168,7 @@
                         <?php } ?>
                         <li class="nav-item">
                             <a href="<?= url() ?>/process/auth/logout.php"class="nav-link">
-                                <i class="nav-icon far fa-logout"></i>
+                                <i class="nav-icon fa-solid fa-right-from-bracket"></i>
                                 <p> Logout</p>
                             </a>
                         </li>
