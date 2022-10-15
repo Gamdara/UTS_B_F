@@ -14,11 +14,7 @@
                     <h1 class="m-0">Daftar Peminjam Buku</h1>
                 </div>
                 <!-- /.col -->
-                <div class="col-sm-6 ">
-                    <button class="btn btn-primary rounded-circle shadow float-sm-right" >
-                        <i class="fa fa-plus" aria-hidden="true"></i>
-                    </button>
-                </div>
+                
                 
                     <!-- /.col -->
             </div>

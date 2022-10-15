@@ -128,25 +128,25 @@
                         <?php if($_SESSION['user']['role'] == "admin"){ ?>
                         <li class="nav-item">
                             <a href="<?= url() ?>/views/pages/admin/genre/index.php"class="nav-link">
-                                <i class="nav-icon far fa-circle"></i>
+                                <i class="nav-icon fa-regular fa-bookmark"></i>
                                 <p> Genre</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="<?= url() ?>/views/pages/admin/buku/index.php"class="nav-link">
-                                <i class="nav-icon far fa-circle"></i>
+                                <i class="nav-icon fas fa-book"></i>
                                 <p> Buku</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="<?= url() ?>/views/pages/admin/peminjaman/index.php"class="nav-link">
-                                <i class="nav-icon far fa-circle"></i>
+                                <i class="nav-icon fas fa-book-reader"></i>
                                 <p> Peminjaman</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="<?= url() ?>/views/pages/admin/user/index.php"class="nav-link">
-                                <i class="nav-icon far fa-circle"></i>
+                                <i class="nav-icon fas fa-address-card"></i>
                                 <p> User</p>
                             </a>
                         </li>
