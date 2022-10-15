@@ -149,13 +149,13 @@
                         <?php if($_SESSION['user']['role'] == "user") { ?>
                         <li class="nav-item">
                             <a href="<?= url() ?>/views/pages/user/booklist.php"class="nav-link">
-                                <i class="nav-icon far fa-circle"></i>
+                                <i class="nav-icon fas fa-book"></i>
                                 <p> List buku</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="<?= url() ?>/views/pages/user/userbook.php"class="nav-link">
-                                <i class="nav-icon far fa-circle"></i>
+                                <i class="nav-icon fas fa-address-card"></i>
                                 <p> User buku</p>
                             </a>
                         </li>

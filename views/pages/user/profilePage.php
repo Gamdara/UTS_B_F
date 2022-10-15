@@ -4,7 +4,7 @@
 ?>
 
 <?php
-  $query = mysqli_query($con, "SELECT * FROM users WHERE id=".$_SESSION['user']['id']);
+  $query = mysqli_query($con, "SELECT * FROM users WHERE id= ".$_SESSION['user']['id']);
   $data = mysqli_fetch_assoc($query);
 ?>
 
