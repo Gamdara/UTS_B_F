@@ -89,7 +89,7 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="#" class="brand-link">
-                <div class="image icon-kecil" style="display: none;">
+                <div class="image icon-kecil  justify-content-center" style="display: none;">
                     <img style="height : 2.1rem !important" src="<?= url() ?>/assets/img/perpus-lay.png"
                         class="img-circle elevation-2" alt="User Image">
                 </div>
@@ -242,10 +242,10 @@ function dashboard_close(){ ?>
             console.log($('body').hasClass('sidebar-collapse'))
             if($('body').hasClass('sidebar-collapse')){
                 $('.icon-kecil').css('display', 'none')
-                $('.icon-gede').css('display', 'block')
+                $('.icon-gede').css('display', 'flex')
             }
             else{
-                $('.icon-kecil').css('display', 'block')
+                $('.icon-kecil').css('display', 'flex')
                 $('.icon-gede').css('display', 'none')
             }
         }
