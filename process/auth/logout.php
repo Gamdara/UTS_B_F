@@ -1,9 +1,12 @@
 <?php 
     session_start();
-    session_destroy();
+    unset($_SESSION['user']);
+    $_SESSION['alert'] = [
+        'color' => 'success',
+        'msg' => 'Berhasil Logout'
+    ];
     echo "
-        <script>
-        alert('Berhasil Logout')
+        <script>    
         window.location.href = '../../index.php'
         </script>
     "

@@ -2,6 +2,7 @@
     //session_start();
     if(isset($_POST['update'])){
         include('../db.php');
+        include('../functions.php');
 
         $email = $_POST['email'];
         $nama = $_POST['nama'];

@@ -1,14 +1,14 @@
 <?php 
     require_once (dirname(__FILE__, 3).'/process/db.php') ;
     require_once (dirname(__FILE__, 3).'/process/functions.php') ;
-
+    
     if(!isset($_SESSION['user'])){
-        echo"
-        <script>
-            alert('Silahkan Login dulu');
-            window.location.href = '".url()."';
-        </script>
-        ";
+        $_SESSION['alert'] = [
+            'color' => 'error',
+            'msg' => 'Silahkan Login Dulu'
+        ];
+        header("location: ".url()."/views/pages/user/loginPage.php");
+        die();
     }
     
 ?>
