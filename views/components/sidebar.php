@@ -33,8 +33,7 @@
     <link rel="stylesheet" href="<?= url() ?>\assets\css\adminlte.min.css">
     <!-- CSS Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <!-- My CSS -->
-    <link rel="stylesheet" href="../../assets/css/style.css">
+    
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -96,6 +95,7 @@
                 <div class="info icon-gede" style="display: block;">
                     <img src="<?= url() ?>/assets/img/PerpusKita.png" alt="PerpusKita Logo" width="200px"  class="brand-text m-3 font-weight-light" style="opacity: .8">
                 </div>
+                
                 <!-- <span >a</span> -->
             </a>
             <!-- Sidebar -->

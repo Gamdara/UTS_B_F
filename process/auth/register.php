@@ -19,9 +19,12 @@
         $query = mysqli_query($con, "SELECT * FROM users WHERE email = '$email'");
         $users = mysqli_fetch_array($query);
         if(mysqli_num_rows($query) > 0){
+            $_SESSION['alert'] = [
+                'color' => 'error',
+                'msg' => 'Email Harus Unik'
+            ];
             echo
                 '<script>
-                alert("Email harus unik!");
                 window.location = "../../views/pages/user/regisPage.php"
                 </script>';
             die();
@@ -35,15 +38,22 @@
             ('$email', '$password', '$nama', '$foto')")
             or die(mysqli_error($con)); 
         if($query){
+            $_SESSION['alert'] = [
+                'color' => 'success',
+                'msg' => 'Register Success'
+            ];
             echo
                 '<script>
-                alert("Register Success"); 
                 window.location = "../../index.php"
                 </script>';
         }else{
+            $_SESSION['alert'] = [
+                'color' => 'error',
+                'msg' => 'Register Failes'
+            ];
             echo
                 '<script>
-                alert("Register Failed");
+                window.location = "../../index.php"
                 </script>';
             }
         }

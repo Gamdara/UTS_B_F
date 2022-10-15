@@ -10,9 +10,13 @@
         die(mysqli_error($con));
         
         if(mysqli_num_rows($query) == 0){
+            $_SESSION['alert'] = [
+                'color' => 'error',
+                'msg' => 'Email not found!'
+            ];
             echo
             '<script>
-            alert("Email not found!"); window.location = "../../views/pages/user/loginPage.php"
+            window.location = "../../views/pages/user/loginPage.php"
             </script>';
         }else{
             $user = mysqli_fetch_assoc($query);
@@ -20,14 +24,21 @@
         
                 $_SESSION['isLogin'] = true;
                 $_SESSION['user'] = $user;
+                $_SESSION['alert'] = [
+                    'color' => 'success',
+                    'msg' => 'Login Success'
+                ];
                 echo
                 '<script>
-                alert("Login Success"); window.location = "../../views/pages/admin/dashboard.php"
+                window.location = "../../views/pages/admin/dashboard.php"
                 </script>';
             }else {
+                $_SESSION['alert'] = [
+                    'color' => 'error',
+                    'msg' => 'Email or Password Invalid'
+                ];
                 echo
                 '<script>
-                alert("Email or Password Invalid");
                 window.location = "../../views/pages/user/loginPage.php"
                 </script>';
             }

@@ -1,4 +1,4 @@
-<?php include"../../../process/functions.php" ?>
+<?php include"../../../process/functions.php"; session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="<?= url() ?>/assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <link rel="stylesheet" href="<?= url() ?>\assets\css\adminlte.min.css">
     <title>Masuk</title>
     <link rel="shortcut icon" href="<?= url() ?>/assets/img/gambar-favicon.png">
 </head>
@@ -57,6 +59,22 @@
             </fieldset>
         </div>
     </div>
-    
+    <script src="<?= url() ?>/assets/plugins/jquery/jquery.min.js"></script>
+    <script src="<?= url() ?>/assets/js/adminlte.min.js"></script>
+    <script src="<?= url() ?>/assets/plugins/sweetalert2/sweetalert2.min.js"></script>
+
+    <script>
+          // const Swal = require('sweetalert2')
+
+          <?php if(isset($_SESSION['alert'])){ ?>
+              Swal.fire(
+              '<?= $_SESSION['alert']['color'] == "success" ? "Sukses" : "Gagal" ?>',
+              '<?= $_SESSION['alert']['msg'] ?>',
+              '<?= $_SESSION['alert']['color'] ?>'
+              )
+          <?php unset($_SESSION['alert']); } ?>
+
+      </script>
+
 </body>
 </html>
