@@ -94,7 +94,7 @@
                         class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info icon-gede" style="display: block;">
-                    <img src="<?= url() ?>/assets/img/PerpusKita.png" alt="AdminLTE Logo" width="200px"  class="brand-text m-3 font-weight-light" style="opacity: .8">
+                    <img src="<?= url() ?>/assets/img/PerpusKita.png" alt="PerpusKita Logo" width="200px"  class="brand-text m-3 font-weight-light" style="opacity: .8">
                 </div>
                 <!-- <span >a</span> -->
             </a>
