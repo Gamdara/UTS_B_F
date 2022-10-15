@@ -19,6 +19,7 @@
         $query = mysqli_query($con, "SELECT * FROM users WHERE email = '$email'");
         $users = mysqli_fetch_array($query);
         if(mysqli_num_rows($query) > 0){
+            
             echo
                 '<script>
                 alert("Email harus unik!");
