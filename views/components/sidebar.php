@@ -42,7 +42,7 @@
     <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
         <!-- Left navbar links -->
-            <ul class="navbar-nav">
+            <ul class="navbar-nav" onclick="toggleIcon()">
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#"
                     role="button">
@@ -89,7 +89,13 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="#" class="brand-link">
-                <img src="<?= url() ?>/assets/img/PerpusKita.png" alt="AdminLTE Logo" width="200px"  class="brand-text m-3 font-weight-light" style="opacity: .8">
+                <div class="image icon-kecil" style="display: none;">
+                    <img style="height : 2.1rem !important" src="<?= url() ?>/assets/img/perpus-lay.png"
+                        class="img-circle elevation-2" alt="User Image">
+                </div>
+                <div class="info icon-gede" style="display: block;">
+                    <img src="<?= url() ?>/assets/img/PerpusKita.png" alt="AdminLTE Logo" width="200px"  class="brand-text m-3 font-weight-light" style="opacity: .8">
+                </div>
                 <!-- <span >a</span> -->
             </a>
             <!-- Sidebar -->
@@ -229,6 +235,24 @@ function dashboard_close(){ ?>
             )
         <?php unset($_SESSION['alert']); } ?>
 
+    </script>
+    
+    <script>
+        function toggleIcon(){
+            console.log($('body').hasClass('sidebar-collapse'))
+            if($('body').hasClass('sidebar-collapse')){
+                $('.icon-kecil').css('display', 'none')
+                $('.icon-gede').css('display', 'block')
+            }
+            else{
+                $('.icon-kecil').css('display', 'block')
+                $('.icon-gede').css('display', 'none')
+            }
+        }
+
+        // $( document ).ready(function() {
+        //     toggleIcon();
+        // });
     </script>
 
     <script>
