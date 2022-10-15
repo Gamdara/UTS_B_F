@@ -1,20 +1,21 @@
 <?php
     require "../../components/sidebar.php"
-
 ?>
-
+<?php
+    dashboard_open()
+?>
 <?php
   $query = mysqli_query($con, "SELECT * FROM users WHERE id=".$_SESSION['user']['id']);
   $data = mysqli_fetch_assoc($query);
 ?>
 
-            <div class="container p-3 m-4 h-100" style="background-color: #FFFFFF; border-top: 5px solid #D40013; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" >
+            <div class="content p-3 m-4 h-100" style="background-color: #FFFFFF; border-top: 5px solid #D40013; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" >
                 <div class="body d-flex justify-content-between">
                     <h4>PROFILE</h4> 
                 </div>
                 <hr>
                 <form>
-                <img height="100" src="<?= url() ?>/assets/upload/<?= $data['foto'] ? $data['foto'] : "noimage.png" ?>" alt="" style="border-radius: 50%">
+                <img height="150" src="<?= url() ?>/assets/upload/<?= $data['foto'] ? $data['foto'] : "noimage.png" ?>" alt="" style="border-radius: 50%; margin-bottom:15px">
                 
                     <div class="mb-3">
                       <label for="input1" class="form-label">Nama</label>
@@ -45,3 +46,6 @@
         </script>
     </body>
 </html>
+<?php
+    dashboard_close()
+?>

@@ -89,7 +89,7 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="#" class="brand-link">
-                <img src="<?= url() ?>/assets/img/PerpusKita.png" alt="AdminLTE Logo" width="200px" class="brand-text m-3 font-weight-light" style="opacity: .8">
+                <img src="<?= url() ?>/assets/img/PerpusKita.png" alt="PerpusKita Logo" width="200px" class="brand-text m-3 font-weight-light" style="opacity: .8">
                 <!-- <span >a</span> -->
             </a>
             <!-- Sidebar -->
