@@ -10,9 +10,12 @@
 
         $query = mysqli_query($con, "SELECT * FROM users WHERE email = '$email' AND email <> '". $_SESSION['user']['email'] ."'");
         if(mysqli_num_rows($query) > 0){
+            $_SESSION['alert'] = [
+                'color' => 'error',
+                'msg' => 'Email sudah pernah digunakan!'
+            ];
             echo
                 '<script>
-                alert("Email sudah pernah digunakan!");
                 window.location = "../../views/pages/user/editProfilePage.php"
                 </script>';
             die();
@@ -42,16 +45,19 @@
                 $user = mysqli_fetch_assoc($query2);
                 $_SESSION['user'] = $user;
             }
+            $_SESSION['alert'] = [
+                'color' => 'success',
+                'msg' => 'Profil Berhasil di Edit'
+            ];
             echo
                 '<script>
-                alert("Profil Berhasil di Edit");
-                window.location = "../../views/pages/user/profilePage.php"
+                window.location = "../../views/pages/user/editProfilePage.php"
                 </script>';
         }else{
-            echo
-                '<script>
-                alert("Profil gagal di Edit");
-                </script>';
+            $_SESSION['alert'] = [
+                'color' => 'error',
+                'msg' => 'Gagal Edit!'
+            ];
         }
 
     }else{
