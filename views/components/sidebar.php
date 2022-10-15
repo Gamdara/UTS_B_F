@@ -42,7 +42,7 @@
     <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
         <!-- Left navbar links -->
-            <ul class="navbar-nav">
+            <ul class="navbar-nav" onclick="toggleIcon()">
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#"
                     role="button">
@@ -89,18 +89,24 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="#" class="brand-link">
-                <img src="<?= url() ?>/assets/img/PerpusKita.png" alt="PerpusKita Logo" width="200px" class="brand-text m-3 font-weight-light" style="opacity: .8">
+                <div class="image icon-kecil" style="display: none;">
+                    <img style="height : 2.1rem !important" src="<?= url() ?>/assets/img/perpus-lay.png"
+                        class="img-circle elevation-2" alt="User Image">
+                </div>
+                <div class="info icon-gede" style="display: block;">
+                    <img src="<?= url() ?>/assets/img/PerpusKita.png" alt="PerpusKita Logo" width="200px"  class="brand-text m-3 font-weight-light" style="opacity: .8">
+                </div>
                 <!-- <span >a</span> -->
             </a>
             <!-- Sidebar -->
             <div class="sidebar">
             <!-- Sidebar user panel (optional) -->
-                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex align-items-center">
                     <div class="image">
-                        <img src="<?= url() ?>/assets/upload/<?= $_SESSION['user']['foto'] ? $_SESSION['user']['foto'] : "user2-160x160.jpg" ?>"
+                        <img style="height : 2.1rem !important" src="<?= url() ?>/assets/upload/<?= $_SESSION['user']['foto'] ? $_SESSION['user']['foto'] : "user2-160x160.jpg" ?>"
                         class="img-circle elevation-2" alt="User Image">
                     </div>
-                    <div class="info">
+                    <div class="info text-wrap">
                         <a href="<?= url() ?>/views/pages/user/editProfilePage.php" class="d-block"><?= $_SESSION['user']['nama'] ?></a>
                     </div>
                 </div>
@@ -149,13 +155,13 @@
                         <?php if($_SESSION['user']['role'] == "user") { ?>
                         <li class="nav-item">
                             <a href="<?= url() ?>/views/pages/user/booklist.php"class="nav-link">
-                                <i class="nav-icon far fa-circle"></i>
+                                <i class="nav-icon fas fa-book"></i>
                                 <p> List buku</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="<?= url() ?>/views/pages/user/userbook.php"class="nav-link">
-                                <i class="nav-icon far fa-circle"></i>
+                                <i class="nav-icon fas fa-address-card"></i>
                                 <p> User buku</p>
                             </a>
                         </li>
@@ -229,6 +235,24 @@ function dashboard_close(){ ?>
             )
         <?php unset($_SESSION['alert']); } ?>
 
+    </script>
+    
+    <script>
+        function toggleIcon(){
+            console.log($('body').hasClass('sidebar-collapse'))
+            if($('body').hasClass('sidebar-collapse')){
+                $('.icon-kecil').css('display', 'none')
+                $('.icon-gede').css('display', 'block')
+            }
+            else{
+                $('.icon-kecil').css('display', 'block')
+                $('.icon-gede').css('display', 'none')
+            }
+        }
+
+        // $( document ).ready(function() {
+        //     toggleIcon();
+        // });
     </script>
 
     <script>
