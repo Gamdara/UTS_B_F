@@ -49,8 +49,7 @@
     
     if(isset($_POST['delete'])){
         $loan = select("peminjamans", "id_buku = $_POST[id] and status = 1");
-        
-        if($loan != null || count( $loan )> 0 ){
+        if($loan != null || count($loan )> 0 ){
             $_SESSION['alert'] = [
                 'color' => 'error',
                 'msg' => 'Gagal menghapus buku, buku sedang dipinjam'

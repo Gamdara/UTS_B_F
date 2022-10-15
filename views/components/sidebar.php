@@ -94,7 +94,7 @@
                         class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info icon-gede" style="display: block;">
-                    <img src="<?= url() ?>/assets/img/PerpusKita.png" alt="AdminLTE Logo" width="200px"  class="brand-text m-3 font-weight-light" style="opacity: .8">
+                    <img src="<?= url() ?>/assets/img/PerpusKita.png" alt="PerpusKita Logo" width="200px"  class="brand-text m-3 font-weight-light" style="opacity: .8">
                 </div>
                 <!-- <span >a</span> -->
             </a>
@@ -128,25 +128,25 @@
                         <?php if($_SESSION['user']['role'] == "admin"){ ?>
                         <li class="nav-item">
                             <a href="<?= url() ?>/views/pages/admin/genre/index.php"class="nav-link">
-                                <i class="nav-icon far fa-circle"></i>
+                                <i class="nav-icon fa-regular fa-bookmark"></i>
                                 <p> Genre</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="<?= url() ?>/views/pages/admin/buku/index.php"class="nav-link">
-                                <i class="nav-icon far fa-circle"></i>
+                                <i class="nav-icon fas fa-book"></i>
                                 <p> Buku</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="<?= url() ?>/views/pages/admin/peminjaman/index.php"class="nav-link">
-                                <i class="nav-icon far fa-circle"></i>
+                                <i class="nav-icon fas fa-book-reader"></i>
                                 <p> Peminjaman</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="<?= url() ?>/views/pages/admin/user/index.php"class="nav-link">
-                                <i class="nav-icon far fa-circle"></i>
+                                <i class="nav-icon fas fa-address-card"></i>
                                 <p> User</p>
                             </a>
                         </li>
@@ -155,13 +155,13 @@
                         <?php if($_SESSION['user']['role'] == "user") { ?>
                         <li class="nav-item">
                             <a href="<?= url() ?>/views/pages/user/booklist.php"class="nav-link">
-                                <i class="nav-icon far fa-circle"></i>
+                                <i class="nav-icon fas fa-book"></i>
                                 <p> List buku</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="<?= url() ?>/views/pages/user/userbook.php"class="nav-link">
-                                <i class="nav-icon far fa-circle"></i>
+                                <i class="nav-icon fas fa-address-card"></i>
                                 <p> User buku</p>
                             </a>
                         </li>
