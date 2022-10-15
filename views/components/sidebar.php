@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link rel="stylesheet" href="<?= url() ?>/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="<?= url() ?>/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="<?= url() ?>/assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
     <link rel="stylesheet" href="<?= url() ?>/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?= url() ?>\assets\css\adminlte.min.css">
@@ -209,13 +210,47 @@ function dashboard_close(){ ?>
     <script src="<?= url() ?>/assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="<?= url() ?>/assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="<?= url() ?>/assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-
+    <script src="<?= url() ?>/assets/plugins/sweetalert2/sweetalert2.min.js"></script>
     <!-- AdminLTE App -->
     <script src="<?= url() ?>/assets/js/adminlte.min.js"></script>
     <!-- My Script -->
     <script src="../../assets/js/script.js"></script>
     <!-- Bootstrap script -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+
+    <script>
+        // const Swal = require('sweetalert2')
+     
+        <?php if(isset($_SESSION['alert'])){ ?>
+            Swal.fire(
+            '<?= $_SESSION['alert']['color'] == "success" ? "Sukses" : "Gagal" ?>',
+            '<?= $_SESSION['alert']['msg'] ?>',
+            '<?= $_SESSION['alert']['color'] ?>'
+            )
+        <?php unset($_SESSION['alert']); } ?>
+
+    </script>
+
+    <script>
+        function sweetConfirm(e){
+          
+            Swal.fire({
+            title: 'Yakin ingin menghapus?',
+            showDenyButton: true,
+            confirmButtonText: 'Ya',
+            icon : 'question',
+            denyButtonText: `Tidak`,
+            }).then((result) => {
+            
+            if (result.isConfirmed) {
+                $(e).parent().submit()
+            } else if (result.isDenied) {
+                return false;
+            }
+            })
+            return false;
+        }
+    </script>
 </body>
 </html>
 <?php } ?>

@@ -5,7 +5,7 @@
         unset($_POST['insert']);
         unset($_POST['id']);
         insert("genres", $_POST);
-        $alert = [
+        $_SESSION['alert'] = [
             'color' => 'success',
             'msg' => 'Berhasil menambah genre'
         ];
@@ -14,7 +14,7 @@
     if(isset($_POST['update'])){
         unset($_POST['update']);
         update("genres", $_POST, "id = $_POST[id]");
-        $alert = [
+        $_SESSION['alert'] = [
             'color' => 'success',
             'msg' => 'Berhasil mengubah genre'
         ];
@@ -22,7 +22,7 @@
     
     if(isset($_POST['delete'])){
         delete("genres", "id = $_POST[id]");
-        $alert = [
+        $_SESSION['alert'] = [
             'color' => 'success',
             'msg' => 'Berhasil menghapus genre'
         ];
@@ -85,20 +85,18 @@
                                                     <form action="" method="POST" class="d-inline-block">
                                                         <input type="hidden" name="id" value="<?= $genre['id'] ?>">
                                                         <input type="hidden" name="delete" value="1">
-                                                        <button  class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus?')"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                        <button  class="btn btn-danger" onclick="return sweetConfirm(this)"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                                     </form>
                                                 </td>
                                             </tr>  
                                         <?php }} else{ ?>
-                                            <div class="alert alert-danger">
-                                                Data Genre belum tersedia
-                                            </div>
+                                            <tr>
+                                                <td class="text-center" colspan="6">
+                                                    Data Genre belum tersedia
+                                                </td>
+                                            <tr>    
                                         <?php } ?>
-                                        <?php if(isset($alert)){ ?>
-                                            <div class="alert alert-<?= $alert['color'] ?> alert-dismissible fade show">
-                                                <?= $alert['msg'] ?>
-                                            </div>
-                                        <?php } ?>
+                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -137,9 +135,9 @@
         </div>
     </form>
 </div>
+<?php var_dump($_SESSION['alert']); ?>
 <script>
     const genres = JSON.parse('<?= json_encode($genres) ?>')
-
     function setEditModal(id){
         let genre = genres.find(x => x.id == id)
         console.log(genre);

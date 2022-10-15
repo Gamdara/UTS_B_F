@@ -8,7 +8,7 @@
         $_POST = upload_file($_POST, $_FILES);
     
         insert("peminjamans", $_POST);
-        $alert = [
+        $_SESSION['alert'] = [
             'color' => 'success',
             'msg' => 'Berhasil menambah peminjaman'
         ];            
@@ -19,7 +19,7 @@
         unset($_POST['update']);
 
         update("peminjamans", $_POST, "id = $_POST[id]");
-        $alert = [
+        $_SESSION['alert'] = [
             'color' => 'success',
             'msg' => 'Berhasil mengubah peminjaman'
         ];    
@@ -29,7 +29,7 @@
     
     if(isset($_POST['delete'])){
         delete("peminjamans", "id = $_POST[id]");
-        $alert = [
+        $_SESSION['alert'] = [
             'color' => 'success',
             'msg' => 'Berhasil menghapus peminjaman'
         ];
@@ -93,20 +93,18 @@
                                                     <form action="" method="POST" class="d-inline-block">
                                                         <input type="hidden" name="id" value="<?= $loan['id'] ?>">
                                                         <input type="hidden" name="delete" value="1">
-                                                        <button  class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus?')"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                        <button  class="btn btn-danger" onclick="return sweetConfirm(this)"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                                     </form>
                                                 </td>
                                             </tr>  
                                         <?php }} else{ ?>
-                                            <div class="alert alert-danger">
-                                                Data Peminjaman belum tersedia
-                                            </div>
+                                            <tr>
+                                                <td class="text-center" colspan="6">
+                                                    Data Peminjaman belum tersedia
+                                                </td>
+                                            <tr>    
                                         <?php } ?>
-                                        <?php if(isset($alert)){ ?>
-                                            <div class="alert alert-<?= $alert['color'] ?> alert-dismissible fade show">
-                                                <?= $alert['msg'] ?>
-                                            </div>
-                                        <?php } ?>
+                                        
                                     </tbody>
                                 </table>
                             </div>

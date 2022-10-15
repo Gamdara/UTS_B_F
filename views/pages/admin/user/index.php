@@ -12,14 +12,14 @@
             
             $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
             insert("users", $_POST);
-            $alert = [
+            $_SESSION['alert'] = [
                 'color' => 'success',
                 'msg' => 'Berhasil menambah user'
             ];    
         }
         else{
-            $alert = [
-                'color' => 'danger',
+            $_SESSION['alert'] = [
+                'color' => 'error',
                 'msg' => verify_files($_FILES)["msg"]
             ];
         }
@@ -31,8 +31,8 @@
         $userLama = select('users', "id = $_POST[id]")[0];
         
         if(!password_verify ($_POST['passwordLama'],  $userLama['password'] ) ){
-            $alert = [
-                'color' => 'danger',
+            $_SESSION['alert'] = [
+                'color' => 'error',
                 'msg' => 'Password lama tidak sesuai'
             ]; 
         }
@@ -45,14 +45,14 @@
                 unset($_POST['passwordLama']);
                 $_POST['password'] = md5($_POST['password']);
                 update("users", $_POST, "id = $_POST[id]");
-                $alert = [
+                $_SESSION['alert'] = [
                     'color' => 'success',
                     'msg' => 'Berhasil mengubah user'
                 ];    
             }
             else{
-                $alert = [
-                    'color' => 'danger',
+                $_SESSION['alert'] = [
+                    'color' => 'error',
                     'msg' => verify_files($_FILES)["msg"]
                 ];
             }
@@ -63,7 +63,7 @@
     
     if(isset($_POST['delete'])){
         delete("users", "id = $_POST[id]");
-        $alert = [
+        $_SESSION['alert'] = [
             'color' => 'success',
             'msg' => 'Berhasil menghapus user'
         ];
@@ -128,22 +128,20 @@
                                                         <form action="" method="POST" class="d-inline-block">
                                                             <input type="hidden" name="id" value="<?= $user['id'] ?>">
                                                             <input type="hidden" name="delete" value="1">
-                                                            <button  class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus?')"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                            <button  class="btn btn-danger" onclick="return sweetConfirm(this)"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                                         </form>
                                                     <?php } ?>
                                                 </td>
                                             </tr>  
                                             
                                         <?php }} else{ ?>
-                                            <div class="alert alert-danger">
-                                                Data User belum tersedia
-                                            </div>
+                                            <tr>
+                                                <td class="text-center" colspan="6">
+                                                    Data User belum tersedia
+                                                </td>
+                                            <tr>    
                                         <?php } ?>
-                                        <?php if(isset($alert)){ ?>
-                                            <div class="alert alert-<?= $alert['color'] ?> alert-dismissible fade show">
-                                                <?= $alert['msg'] ?>
-                                            </div>
-                                        <?php } ?>
+                                        
                                     </tbody>
                                 </table>
                             </div>

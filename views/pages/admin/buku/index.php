@@ -10,14 +10,14 @@
             $_POST = upload_file($_POST, $_FILES);
         
             insert("bukus", $_POST);
-            $alert = [
+            $_SESSION['alert'] = [
                 'color' => 'success',
                 'msg' => 'Berhasil menambah buku'
             ];    
         }
         else{
-            $alert = [
-                'color' => 'danger',
+            $_SESSION['alert'] = [
+                'color' => 'error',
                 'msg' => verify_files($_FILES)["msg"]
             ];
         }
@@ -33,14 +33,14 @@
                 $_POST = upload_file($_POST, $_FILES);
 
             update("bukus", $_POST, "id = $_POST[id]");
-            $alert = [
+            $_SESSION['alert'] = [
                 'color' => 'success',
                 'msg' => 'Berhasil mengubah buku'
             ];    
         }
         else{
-            $alert = [
-                'color' => 'danger',
+            $_SESSION['alert'] = [
+                'color' => 'error',
                 'msg' => verify_files($_FILES)["msg"]
             ];
         }
@@ -50,14 +50,14 @@
     if(isset($_POST['delete'])){
         $loan = select("peminjamans", "id_buku = $_POST[id] and status = 1");
         if($loan != null || count( $loan > 0 )){
-            $alert = [
-                'color' => 'danger',
+            $_SESSION['alert'] = [
+                'color' => 'error',
                 'msg' => 'Gagal menghapus buku, buku sedang dipinjam'
             ];
         }
         else{
             delete("bukus", "id = $_POST[id]");
-            $alert = [
+            $_SESSION['alert'] = [
                 'color' => 'success',
                 'msg' => 'Berhasil menghapus buku'
             ];
@@ -126,20 +126,18 @@
                                                     <form action="" method="POST" class="d-inline-block">
                                                         <input type="hidden" name="id" value="<?= $book['id'] ?>">
                                                         <input type="hidden" name="delete" value="1">
-                                                        <button  class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus?')"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                        <button  class="btn btn-danger" onclick="return sweetConfirm(this)"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                                     </form>
                                                 </td>
                                             </tr>  
                                         <?php }} else{ ?>
-                                            <div class="alert alert-danger">
-                                                Data Buku belum tersedia
-                                            </div>
+                                            <tr>
+                                                <td class="text-center" colspan="6">
+                                                    Data Buku belum tersedia
+                                                </td>
+                                            <tr>    
                                         <?php } ?>
-                                        <?php if(isset($alert)){ ?>
-                                            <div class="alert alert-<?= $alert['color'] ?> alert-dismissible fade show">
-                                                <?= $alert['msg'] ?>
-                                            </div>
-                                        <?php } ?>
+                                        
                                     </tbody>
                                 </table>
                             </div>
