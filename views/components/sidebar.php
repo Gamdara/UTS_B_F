@@ -88,10 +88,10 @@
     <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="#" class="brand-link">
+            <a href="<?= url() ?>/views/pages/admin/dashboard.php" class="brand-link ">
                 <div class="image icon-kecil" style="display: none;">
-                    <img style="height : 2.1rem !important" src="<?= url() ?>/assets/img/perpus-lay.png"
-                        class="img-circle elevation-2" alt="User Image">
+                    <img style="height : 2.1rem !important" src="<?= url() ?>/assets/img/brand-PerpusKita.png"
+                        class="elevation-0" alt="User Image">
                 </div>
                 <div class="info icon-gede" style="display: block;">
                     <img src="<?= url() ?>/assets/img/PerpusKita.png" alt="PerpusKita Logo" width="200px"  class="brand-text m-3 font-weight-light" style="opacity: .8">
@@ -103,7 +103,7 @@
             <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex align-items-center">
                     <div class="image">
-                        <img style="height : 2.1rem !important" src="<?= url() ?>/assets/upload/<?= $_SESSION['user']['foto'] ? $_SESSION['user']['foto'] : "user2-160x160.jpg" ?>"
+                        <img style="height : 2.1rem !important; object-fit:cover !important" src="<?= url() ?>/assets/upload/<?= $_SESSION['user']['foto'] ? $_SESSION['user']['foto'] : "user2-160x160.jpg" ?>"
                         class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info text-wrap">
