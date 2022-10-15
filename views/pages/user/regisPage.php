@@ -64,7 +64,7 @@
                         <div class="d-grid gap-2">
                           <button type="submit" class="btn btn-primary" name="daftar">Daftar</button>
                         </div>
-                        <p class="mt-2 mb-0">Sudah punya akun?<a href="<?= url() ?>/views/user/loginPage.php" class="textprimary">Masuk</a></p>
+                        <p class="mt-2 mb-0">Sudah punya akun?<a href="<?= url() ?>/views/pages/user/loginPage.php" class="textprimary">Masuk</a></p>
                       </form>
               </div>
           </fieldset>
