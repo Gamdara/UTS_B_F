@@ -40,7 +40,7 @@
 <body class="hold-transition sidebar-mini">
     <div class="wrapper" >
     <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light"style="background-color:#7781fb;">
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light"style="background-color:<?= $_SESSION['user']['role'] == "admin" ? '#00b4d8' : '#a6e1fa'?>;">
         <!-- Left navbar links -->
             <ul class="navbar-nav" onclick="toggleIcon()">
                 <li class="nav-item">
@@ -187,15 +187,13 @@ function dashboard_close(){ ?>
         </div>
         <!-- /.content-wrapper -->
         <!-- Main Footer -->
-        <footer class="main-footer" style="background-color:#7781fb; color : white">
+        <footer class="main-footer" style="background-color:<?= $_SESSION['user']['role'] == "admin" ? '#00b4d8' : '#a6e1fa'?>; color : white">
             <!-- To the right -->
             <div class="float-right d-none d-sm-inline"> 
                 Kelompok F
             </div>
             <!-- Default to the left -->
-            <strong>Copyright &copy;  2022
-                <a href="#">Perpus Kita</a>. 
-            </strong> All rights reserved.
+            <strong>Copyright &copy;  2022</strong> 
         </footer>
     </div>
     <!-- ./wrapper -->
