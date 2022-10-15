@@ -11751,7 +11751,7 @@ body.sidebar-collapse:not(.sidebar-mini-xs):not(.sidebar-mini-md):not(.sidebar-m
 }
 
 .content-wrapper {
-  background-color: #f4f6f9;
+  background-color: #ebf3ff;
 }
 
 .content-wrapper > .content {
@@ -11852,7 +11852,7 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 }
 
 .main-footer {
-  background-color: #fff;
+  background-color: #7781fb;
   border-top: 1px solid #dee2e6;
   color: #869099;
   padding: 1rem;
@@ -18036,7 +18036,7 @@ body.text-sm .control-sidebar {
 }
 
 .navbar-white {
-  background-color: #fff;
+  background-color: #7781fb;
   color: #1f2d3d;
 }
 

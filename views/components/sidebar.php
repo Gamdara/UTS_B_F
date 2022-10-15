@@ -29,6 +29,7 @@
     <link rel="stylesheet" href="<?= url() ?>/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="<?= url() ?>/assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
     <link rel="stylesheet" href="<?= url() ?>/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet" href="<?= url() ?>\assets\css\adminlte.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?= url() ?>\assets\css\adminlte.min.css">
     <!-- CSS Bootstrap -->
@@ -37,9 +38,9 @@
 </head>
 
 <body class="hold-transition sidebar-mini">
-    <div class="wrapper">
+    <div class="wrapper" >
     <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light"style="background-color:#7781fb;">
         <!-- Left navbar links -->
             <ul class="navbar-nav" onclick="toggleIcon()">
                 <li class="nav-item">
@@ -85,7 +86,7 @@
         </nav>
     <!-- /.navbar -->
     <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <aside class="main-sidebar sidebar-dark-primary elevation-4" >
             <!-- Brand Logo -->
             <a href="<?= url() ?>/views/pages/admin/dashboard.php" class="brand-link ">
                 <div class="image icon-kecil justify-content-center" style="display: none;">
@@ -179,21 +180,21 @@
         <!-- /.sidebar -->
         </aside>
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+        <div class="content-wrapper" style="background-color:#ebf3ff;">
 <?php  }
 function dashboard_close(){ ?>
             
         </div>
         <!-- /.content-wrapper -->
         <!-- Main Footer -->
-        <footer class="main-footer">
+        <footer class="main-footer" style="background-color:#7781fb; color : white">
             <!-- To the right -->
             <div class="float-right d-none d-sm-inline"> 
                 Kelompok F
             </div>
             <!-- Default to the left -->
-            <strong>Copyright &copy; 
-                <a href="#">AdminLTE.io</a>. 
+            <strong>Copyright &copy;  2022
+                <a href="#">Perpus Kita</a>. 
             </strong> All rights reserved.
         </footer>
     </div>
