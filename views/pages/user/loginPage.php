@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<?= url() ?>/assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
@@ -43,12 +44,17 @@
                           </div>
                           <div class="mb-3">
                             <label for="input1" class="form-label">Password</label>
-                            <input
-                              type="password"
-                              class="form-control"
-                              id="password"
-                              name="password" 
-                              placeholder="Masukkan Password" required>
+                            <div class="input-group" id="show_hide_password" style="background-color:white">
+                                <input
+                                type="password"
+                                class="form-control"
+                                id="password"
+                                name="password" 
+                                placeholder="Masukkan Password" required>
+                                <div class="input-group-append">
+                                    <a href="" class="btn btn-outline-secondary" style="border: 1px solid #ced4da; "><i class="fa-regular fa-eye-slash" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
                           </div>
                           <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-primary" name="submit">Masuk</button>
@@ -74,7 +80,26 @@
               )
           <?php unset($_SESSION['alert']); } ?>
 
-      </script>
+    </script>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script>
+    $(document).ready(function() {
+        $("#show_hide_password a").on('click', function(event) {
+            event.preventDefault();
+            if($('#show_hide_password input').attr("type") == "text"){
+                $('#show_hide_password input').attr('type', 'password');
+                $('#show_hide_password i').removeClass( "fa-regular fa-eye" );
+                $('#show_hide_password i').addClass( "fa-regular fa-eye-slash" );
+                
+            }else if($('#show_hide_password input').attr("type") == "password"){
+                $('#show_hide_password input').attr('type', 'text');
+                $('#show_hide_password i').removeClass( "fa-regular fa-eye-slash" );
+                $('#show_hide_password i').addClass( "fa-regular fa-eye" );
+            }
+        });
+    });
+    </script>
 
 </body>
 </html>

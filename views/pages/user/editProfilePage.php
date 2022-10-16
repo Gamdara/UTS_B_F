@@ -37,7 +37,11 @@
                                           class="form-control"
                                           id="nama"
                                           name="nama"
-                                          value="<?php echo $data['nama'] ?>" required>
+                                          value="<?php echo $data['nama'] ?>" required
+                                          <?php if($_SESSION['user']['role']=="admin") { ?>
+                                            readonly
+                                          <?php } ?>
+                                          >
                                       </div>
                                       <div class="mb-3">
                                           <label for="input1" class="form-label">Email</label>
@@ -45,7 +49,11 @@
                                             class="form-control"
                                             id="email"
                                             name="email"
-                                            value="<?php echo $data['email'] ?>" required>
+                                            value="<?php echo $data['email'] ?>" required
+                                            <?php if($_SESSION['user']['role']=="admin") { ?>
+                                                readonly
+                                            <?php } ?>
+                                            >
                                         </div>
                                         <div class="mb-3">
                                           <label>Ubah Foto</label>
@@ -78,27 +86,42 @@
                                                         <form action="<?= url() ?>/process/auth/editPassword.php" method="post" enctype="multipart/form-data">
                                                             <div class="mb-3">
                                                                 <label for="input1" class="form-label">Password Lama</label>
-                                                                <input
-                                                                type="password"
-                                                                class="form-control"
-                                                                id="passwordLama"
-                                                                name="passwordLama" required>
+                                                                <div class="input-group" id="show_hide_password">
+                                                                    <input
+                                                                    type="password"
+                                                                    class="form-control"
+                                                                    id="passwordLama"
+                                                                    name="passwordLama" required>
+                                                                    <div class="input-group-append">
+                                                                        <a href="" class="btn btn-outline-secondary" style="border: 1px solid #ced4da;"><i class="fa-regular fa-eye-slash" aria-hidden="true"></i></a>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label for="input1" class="form-label">Password Baru</label>
-                                                                <input
-                                                                type="password"
-                                                                class="form-control"
-                                                                id="passwordBaru"
-                                                                name="passwordBaru" required>
+                                                                <div class="input-group" id="show_hide_password2">
+                                                                    <input
+                                                                    type="password"
+                                                                    class="form-control"
+                                                                    id="passwordBaru"
+                                                                    name="passwordBaru" required>
+                                                                    <div class="input-group-append">
+                                                                        <a href="" class="btn btn-outline-secondary" style="border: 1px solid #ced4da;"><i class="fa-regular fa-eye-slash" aria-hidden="true"></i></a>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label for="input1" class="form-label">Konfirmasi Password Baru</label>
-                                                                <input
-                                                                type="password"
-                                                                class="form-control"
-                                                                id="konfPasswordBaru"
-                                                                name="konfPasswordBaru" required>
+                                                                <div class="input-group" id="show_hide_password3">
+                                                                    <input
+                                                                    type="password"
+                                                                    class="form-control"
+                                                                    id="konfPasswordBaru"
+                                                                    name="konfPasswordBaru" required>
+                                                                    <div class="input-group-append">
+                                                                        <a href="" class="btn btn-outline-secondary" style="border: 1px solid #ced4da;"><i class="fa-regular fa-eye-slash" aria-hidden="true"></i></a>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                             <!-- footer modal -->
                                                             <div class="modal-footer">
@@ -126,7 +149,52 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous">
+            
         </script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script>
+        $(document).ready(function() {
+            $("#show_hide_password a").on('click', function(event) {
+                event.preventDefault();
+                if($('#show_hide_password input').attr("type") == "text"){
+                    $('#show_hide_password input').attr('type', 'password');
+                    $('#show_hide_password i').removeClass( "fa-regular fa-eye" );
+                    $('#show_hide_password i').addClass( "fa-regular fa-eye-slash" );
+                    
+                }else if($('#show_hide_password input').attr("type") == "password"){
+                    $('#show_hide_password input').attr('type', 'text');
+                    $('#show_hide_password i').removeClass( "fa-regular fa-eye-slash" );
+                    $('#show_hide_password i').addClass( "fa-regular fa-eye" );
+                }
+            });
+            $("#show_hide_password2 a").on('click', function(event) {
+                event.preventDefault();
+                if($('#show_hide_password2 input').attr("type") == "text"){
+                    $('#show_hide_password2 input').attr('type', 'password');
+                    $('#show_hide_password2 i').removeClass( "fa-regular fa-eye" );
+                    $('#show_hide_password2 i').addClass( "fa-regular fa-eye-slash" );
+                    
+                }else if($('#show_hide_password2 input').attr("type") == "password"){
+                    $('#show_hide_password2 input').attr('type', 'text');
+                    $('#show_hide_password2 i').removeClass( "fa-regular fa-eye-slash" );
+                    $('#show_hide_password2 i').addClass( "fa-regular fa-eye" );
+                }
+            });
+            $("#show_hide_password3 a").on('click', function(event) {
+                event.preventDefault();
+                if($('#show_hide_password3 input').attr("type") == "text"){
+                    $('#show_hide_password3 input').attr('type', 'password');
+                    $('#show_hide_password3 i').removeClass( "fa-regular fa-eye" );
+                    $('#show_hide_password3 i').addClass( "fa-regular fa-eye-slash" );
+                    
+                }else if($('#show_hide_password3 input').attr("type") == "password"){
+                    $('#show_hide_password3 input').attr('type', 'text');
+                    $('#show_hide_password3 i').removeClass( "fa-regular fa-eye-slash" );
+                    $('#show_hide_password3 i').addClass( "fa-regular fa-eye" );
+                }
+            });
+        });
+    </script>
     </body>
 </html>
 <?php
