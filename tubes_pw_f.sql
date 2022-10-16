@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 15, 2022 at 10:16 AM
+-- Generation Time: Oct 16, 2022 at 06:19 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `bukus` (
   `id` int(11) NOT NULL,
   `id_genre` int(11) NOT NULL,
+  `id_penulis` int(11) NOT NULL,
   `judul` varchar(255) NOT NULL,
   `jumlah` int(11) NOT NULL,
   `sinopsis` text NOT NULL,
@@ -40,8 +41,8 @@ CREATE TABLE `bukus` (
 -- Dumping data for table `bukus`
 --
 
-INSERT INTO `bukus` (`id`, `id_genre`, `judul`, `jumlah`, `sinopsis`, `cover`) VALUES
-(4, 11, 'qjf', 32, 'wde', '634a665cad00c.png');
+INSERT INTO `bukus` (`id`, `id_genre`, `id_penulis`, `judul`, `jumlah`, `sinopsis`, `cover`) VALUES
+(4, 11, 1, 'qjf', 30, 'wde', '634a665cad00c.png');
 
 -- --------------------------------------------------------
 
@@ -78,6 +79,35 @@ CREATE TABLE `peminjamans` (
   `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `peminjamans`
+--
+
+INSERT INTO `peminjamans` (`id`, `id_buku`, `id_user`, `tanggal_pinjam`, `tanggal_kembali`, `status`) VALUES
+(4, 4, 5, '2022-10-16', '2022-10-23', 0),
+(5, 4, 5, '2022-10-16', '2022-10-23', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `penulis`
+--
+
+CREATE TABLE `penulis` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(255) NOT NULL,
+  `asal` varchar(255) NOT NULL,
+  `tl` date NOT NULL,
+  `foto` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `penulis`
+--
+
+INSERT INTO `penulis` (`id`, `nama`, `asal`, `tl`, `foto`) VALUES
+(1, 'qwe', 'qwe', '2022-10-06', '');
+
 -- --------------------------------------------------------
 
 --
@@ -113,7 +143,8 @@ INSERT INTO `users` (`id`, `nama`, `email`, `password`, `foto`, `role`) VALUES
 --
 ALTER TABLE `bukus`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_buku_genre` (`id_genre`);
+  ADD KEY `fk_buku_genre` (`id_genre`),
+  ADD KEY `fk_buku_penulis` (`id_penulis`);
 
 --
 -- Indexes for table `genres`
@@ -130,6 +161,12 @@ ALTER TABLE `peminjamans`
   ADD KEY `fk_buku_peinjaman` (`id_buku`);
 
 --
+-- Indexes for table `penulis`
+--
+ALTER TABLE `penulis`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -143,7 +180,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `bukus`
 --
 ALTER TABLE `bukus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `genres`
@@ -155,7 +192,13 @@ ALTER TABLE `genres`
 -- AUTO_INCREMENT for table `peminjamans`
 --
 ALTER TABLE `peminjamans`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `penulis`
+--
+ALTER TABLE `penulis`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -171,7 +214,8 @@ ALTER TABLE `users`
 -- Constraints for table `bukus`
 --
 ALTER TABLE `bukus`
-  ADD CONSTRAINT `fk_buku_genre` FOREIGN KEY (`id_genre`) REFERENCES `genres` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `fk_buku_genre` FOREIGN KEY (`id_genre`) REFERENCES `genres` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_buku_penulis` FOREIGN KEY (`id_penulis`) REFERENCES `penulis` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `peminjamans`

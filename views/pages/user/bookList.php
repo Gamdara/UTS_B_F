@@ -34,7 +34,7 @@ dashboard_open()
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <div class="table-responsive p-0">
+                            <div class=" w-full p-0">
                                 
                                 <table class="table table-hover text-nowrap" id="datatable">
                                 <thead>

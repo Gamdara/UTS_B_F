@@ -1,7 +1,7 @@
 <?php require_once "../../../components/sidebar.php" ?>
 
 <?php 
-    $book = select_join("bukus", ["genres" => "(genres.id = bukus.id_genre)"], "bukus.id = $_GET[id]", "bukus.*, genres.genre")[0];
+    $book = select_join("bukus", ["genres" => "(genres.id = bukus.id_genre)", "penulis" => "(penulis.id = bukus.id_penulis)"], "bukus.id = $_GET[id]", "bukus.*, genres.genre, penulis.nama")[0];
     $loans = select_join("peminjamans", ['users' => '(users.id = peminjamans.id_user)'], "id_buku = $_GET[id]", "peminjamans.*, users.nama");
     
 ?>
@@ -27,10 +27,10 @@
     <div class="content">
         <div class="container-fluid">
             <div class="row mb-4">
-                <div class="col-4 d-flex justify-content-center">
-                    <img height="500" src="<?= url() ?>/assets/upload/<?= $book['cover'] ? $book['cover'] : "noimage.png" ?>" alt="" readonly>
+                <div class="col-12 col-md-4 d-flex justify-content-center">
+                    <img height="500" width="300" style="object-fit: contain;" src="<?= url() ?>/assets/upload/<?= $book['cover'] ? $book['cover'] : "noimage.png" ?>" alt="" readonly>
                 </div>
-                <div class="col-8">
+                <div class="col-12 col-md-8">
                     <div class="form-group">
                         <label for="judul">Judul</label>
                         <input type="text" name="judul" class="form-control" value="<?= $book['judul'] ?>"   readonly>
@@ -39,6 +39,11 @@
                     <div class="form-group">
                         <label for="genre">Genre</label>
                         <input type="text" name="judul" class="form-control" value="<?= $book['genre'] ?>"   readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="genre">Penulis</label>
+                        <input type="text" name="judul" class="form-control" value="<?= $book['nama'] ?>"   readonly>
                     </div>
 
                     <div class="form-group">
