@@ -25,6 +25,9 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
+
+                                  <button class="btn btn-warning mb-3"><a href="#" style="text-decoration:none; color:white;" data-toggle="modal" data-target="#myModal"><b>Ubah Password?</b></a> </button>
+
                                   <form action="<?= url() ?>/process/auth/profil.php" method="post" enctype="multipart/form-data">
                                   <img height="150" src="<?= url() ?>/assets/upload/<?= $data['foto'] ? $data['foto'] : "noimage.png" ?>" alt="" style="border-radius: 50%; margin-bottom:15px">
                                   
@@ -50,14 +53,62 @@
                                               type="file"
                                               class="form-control"
                                               id="file"
-                                              
                                               name="foto" require>
                                         </div>
+                                        
 
                                       <div class="d-grid gap-2">
-                                        <button type="submit" class="btn btn-secondary" name="update">Update</button>
+                                        <button type="submit" class="btn btn-primary" name="update">Update</button>
                                       </div>
-                                  </form>                            
+                                  </form>
+                                  
+                                  <!-- Modal -->
+                                        <div id="myModal" class="modal fade" role="dialog">
+                                            <div class="modal-dialog">
+                                                <!-- konten modal-->
+                                                <div class="modal-content">
+                                                    <!-- heading modal -->
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Ubah Password</h4>
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        
+                                                    </div>
+                                                    <!-- body modal -->
+                                                    <div class="modal-body">
+                                                        <form action="<?= url() ?>/process/auth/editPassword.php" method="post" enctype="multipart/form-data">
+                                                            <div class="mb-3">
+                                                                <label for="input1" class="form-label">Password Lama</label>
+                                                                <input
+                                                                type="password"
+                                                                class="form-control"
+                                                                id="passwordLama"
+                                                                name="passwordLama" required>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="input1" class="form-label">Password Baru</label>
+                                                                <input
+                                                                type="password"
+                                                                class="form-control"
+                                                                id="passwordBaru"
+                                                                name="passwordBaru" required>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="input1" class="form-label">Konfirmasi Password Baru</label>
+                                                                <input
+                                                                type="password"
+                                                                class="form-control"
+                                                                id="konfPasswordBaru"
+                                                                name="konfPasswordBaru" required>
+                                                            </div>
+                                                            <!-- footer modal -->
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-primary" name="updatePass">Update Password</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>                            
                                 </div>
                             <!-- /.card-body -->
                             </div>

@@ -16,10 +16,12 @@
    
 <!DOCTYPE html>
 <html lang="en">
+    
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>TUBES F</title>
+    <title>TUBES F - Perpus Kita</title>
+    <link rel="shortcut icon" href="<?= url() ?>/assets/img/gambar-favicon.png">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -86,7 +88,7 @@
         </nav>
     <!-- /.navbar -->
     <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4" >
+        <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color:<?= $_SESSION['user']['role'] == "admin" ? '#1d3557' : ''?>;">
             <!-- Brand Logo -->
             <a href="<?= url() ?>/views/pages/admin/dashboard.php" class="brand-link ">
                 <div class="image icon-kecil justify-content-center" style="display: none;">
@@ -108,16 +110,16 @@
                         class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info text-wrap">
-                        <a href="<?= url() ?>/views/pages/user/editProfilePage.php" class="d-block"><?= $_SESSION['user']['nama'] ?></a>
+                        <a href="<?= url() ?>/views/pages/user/editProfilePage.php" class="d-block" style="text-decoration:none"><?= $_SESSION['user']['nama'] ?></a>
                     </div>
                 </div>
                 <!-- SidebarSearch Form -->
                 <div class="form-inline">
                     <div class="input-group" data-widget="sidebar-search">
-                        <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+                        <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search" style="background-color:<?= $_SESSION['user']['role'] == "admin" ? '#1d3557' : ''?>;">
                         <div class="input-group-append">
-                            <button class="btn btn-sidebar">
-                                <i class="fas fa-search fa-fw"></i>
+                            <button class="btn btn-sidebar" style="background-color:<?= $_SESSION['user']['role'] == "admin" ? '#1d3557' : ''?>;">
+                                <i class="fas fa-search fa-fw" ></i>
                             </button>
                         </div>
                     </div>
@@ -187,7 +189,7 @@ function dashboard_close(){ ?>
         </div>
         <!-- /.content-wrapper -->
         <!-- Main Footer -->
-        <footer class="main-footer" style="background-color:<?= $_SESSION['user']['role'] == "admin" ? '#00b4d8' : '#a6e1fa'?>; color : white">
+        <footer class="main-footer" style="background-color:<?= $_SESSION['user']['role'] == "admin" ? '#00b4d8' : '#a6e1fa'?>; color : <?= $_SESSION['user']['role'] == "admin" ? 'white' : '#343a40'?>">
             <!-- To the right -->
             <div class="float-right d-none d-sm-inline"> 
                 Kelompok F
