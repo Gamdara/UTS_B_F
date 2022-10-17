@@ -94,7 +94,7 @@ dashboard_close()
         <div class="modal-body" >
         <input type="hidden" name="id_buku">
         <input type="hidden" name="id_user" value="<?= $_SESSION['user']['id'] ?>">
-        <input type="hidden" name="status" value="0">
+        <input type="hidden" name="status" value="1">
           <div class="row mb-4" >
                   <div class="col-4 d-flex justify-content-center">
                       <img width="200" src="" alt="" id="imgCover" >

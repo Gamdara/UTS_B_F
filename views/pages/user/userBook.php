@@ -4,7 +4,7 @@ require "../../components/sidebar.php"
 <?php 
   if(!empty($_POST)){
     unset($_POST['update']);
-    update("peminjamans", ['status' => '1'], "id = $_POST[id]");
+    update("peminjamans", ['status' => '0'], "id = $_POST[id]");
     update("bukus", ['jumlah' => 'jumlah + 1'], "id = $_POST[id_buku]", true);
     $_SESSION['alert'] = [
         'color' => 'success',
@@ -53,10 +53,10 @@ dashboard_open()
                                   <tr>
                                     <td class="text-center"><?= $loan['judul'] ?></td>
                                     <td  class="text-center"><img height="200" src="<?=url()?>/assets/upload/<?= $loan['cover'] ? $loan['cover'] : 'noimage.png' ?>" alt=""></td>
-                                    <td  class="text-center"><?= $loan['status'] ? 'dikembalikan' : 'dipinjam' ?></td>
+                                    <td  class="text-center"><?= $loan['status'] == 1? 'dipinjam' : 'dikembalikan' ?></td>
                                     <td  class="text-center"><?= $loan['tanggal_kembali'] ?></td>
                                     <td  class="text-center">
-                                      <?php if(!$loan['status']) { ?> 
+                                      <?php if($loan['status']) { ?> 
                                         
                                         <form action="" method="POST" class="d-inline-block">
                                           <input type="hidden" name="id" value="<?= $loan['id'] ?>">

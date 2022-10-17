@@ -87,7 +87,7 @@
                                                 <td class="text-center"><?= $loan['nama'] ?></td>
                                                 <td class="text-center"><?= $loan['tanggal_pinjam'] ?></td>
                                                 <td class="text-center"><?= $loan['tanggal_kembali'] ?></td>
-                                                <td class="text-center"><?= $loan['status'] ? "sedang dipinjam" : "dikembalikan" ?></td>
+                                                <td class="text-center"><?= $loan['status'] == 1 ? "sedang dipinjam" : "dikembalikan" ?></td>
                                                 <td class="text-center">
                                                     <button class="btn btn-success" onclick="setEditModal(<?= $loan['id'] ?>)"><i class="fa fa-pencil " aria-hidden="true"></i> </button>
                                                     <form action="" method="POST" class="d-inline-block">
