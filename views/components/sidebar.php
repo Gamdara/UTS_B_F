@@ -31,12 +31,23 @@
     <link rel="stylesheet" href="<?= url() ?>/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="<?= url() ?>/assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
     <link rel="stylesheet" href="<?= url() ?>/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-    <link rel="stylesheet" href="<?= url() ?>\assets\css\adminlte.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?= url() ?>\assets\css\adminlte.min.css">
     <!-- CSS Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    
+    <style>
+        .gambar-dashboard img{
+            width:500px;
+            max-width: 500px;
+            filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+        }
+        @media screen and (max-width: 1316px){
+            .gambar-dashboard img{
+                width:80%;
+            }
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini">
