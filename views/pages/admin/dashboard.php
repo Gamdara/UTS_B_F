@@ -5,7 +5,7 @@
   $data = mysqli_fetch_assoc($query);
 ?>
 
-    <div class="content mt-4">
+    <div class="content pt-4">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
