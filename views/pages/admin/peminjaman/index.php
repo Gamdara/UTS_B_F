@@ -5,8 +5,6 @@
         unset($_POST['insert']);
         unset($_POST['id']);
 
-        $_POST = upload_file($_POST, $_FILES);
-    
         insert("peminjamans", $_POST);
         $_SESSION['alert'] = [
             'color' => 'success',
