@@ -154,7 +154,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="<?= url() ?>/views/pages/admin/penulis/index.php"class="nav-link">
-                                <i class="nav-icon fa-regular fa-bookmark"></i>
+                                <i class="nav-icon fa fa-pen"></i>
                                 <p> Penulis</p>
                             </a>
                         </li>
