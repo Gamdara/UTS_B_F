@@ -39,11 +39,12 @@ dashboard_open()
                                 <table class="table table-hover text-nowrap" id="datatable">
                                 <thead>
                                     <tr>
-                                    <th scope="col">Judul Buku</th>
-                                    <th scope="col">Cover Buku</th>
-                                    <th scope="col">Status Peminjaman</th>
-                                    <th scope="col">Batas pengembalian</th>
-                                    <th scope="col">Pengembalian Buku</th>
+                                    <th class="text-center" scope="col">Judul Buku</th>
+                                    <th class="text-center" scope="col">Cover Buku</th>
+                                    <th class="text-center" scope="col">Status Peminjaman</th>
+                                    <th class="text-center" scope="col">Tanggal Pinjam</th>
+                                    <th class="text-center" scope="col">Batas pengembalian</th>
+                                    <th class="text-center" scope="col">Pengembalian Buku</th>
                                     </tr>
                                 </thead>
 
@@ -54,6 +55,7 @@ dashboard_open()
                                     <td class="text-center"><?= $loan['judul'] ?></td>
                                     <td  class="text-center"><img height="200" src="<?=url()?>/assets/upload/<?= $loan['cover'] ? $loan['cover'] : 'noimage.png' ?>" alt=""></td>
                                     <td  class="text-center"><?= $loan['status'] == 1? 'dipinjam' : 'dikembalikan' ?></td>
+                                    <td  class="text-center"><?= $loan['tanggal_pinjam'] ?></td>
                                     <td  class="text-center"><?= $loan['tanggal_kembali'] ?></td>
                                     <td  class="text-center">
                                       <?php if($loan['status']) { ?> 
